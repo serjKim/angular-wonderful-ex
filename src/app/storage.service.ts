@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { defer, Observable, of, Subject } from 'rxjs';
-import { catchError, delay, map, startWith, switchMap } from 'rxjs/operators';
-import { coreError, CoreError, Pending, pending, ResultError } from './core';
+import { delay, map, startWith, switchMap } from 'rxjs/operators';
+import { catchCoreError, CoreError, Pending, pending, ResultError } from './core';
 
 // prettier-ignore
 export type Items =
@@ -37,7 +37,7 @@ export class StorageService {
         }
         return x.toString();
       }),
-      catchError((x: Error) => of(coreError(x))),
+      catchCoreError(),
       delay(900),
       startWith(pending()),
     );
