@@ -1,0 +1,18 @@
+<mat-form-field>
+  <mat-label>Search repos</mat-label>
+  <input matInput type="text" [formControl]="searchControl" autocomplete="off" />
+</mat-form-field>
+
+<ng-container *wexUnwrap="repos$ | async; let repos; error: output; pending: loading">
+  <div *ngFor="let repo of repos">
+    {{ repo.name }}
+  </div>
+</ng-container>
+
+<ng-template #output>
+  <div>Error occurred.</div>
+</ng-template>
+
+<ng-template #loading>
+  <div>Loading...</div>
+</ng-template>

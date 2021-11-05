@@ -1,0 +1,76 @@
+<div>{{ title }}</div>
+
+<ng-container *wexUnwrap="items$ | async; let items; pending: pending; error: error">
+  <div>Pending container</div>
+  {{ items }}
+</ng-container>
+
+<ng-template #pending> Loading... </ng-template>
+<ng-template #error> Error occurred. </ng-template>
+
+<button (click)="onLoad()">Load</button>
+
+<!-- <div>
+  <h6>Roulette</h6>
+  <ng-container *wexUnwrap="roulette$ | async; let roulette; pending: rPending; error: rError">
+    <span>R: {{ roulette }}</span>
+  </ng-container>
+  <ng-template #rPending>Loading roulette... </ng-template>
+  <ng-template #rError> Error roulette. </ng-template>
+</div> -->
+
+<div>
+  <div>
+    <div>
+      <div>
+        <div>
+          <div>
+            <div>
+              <div>
+                <div>
+                  <div>
+                    <div>
+                      <div>
+                        <div>
+                          <div>
+                            <div>
+                              <div>
+                                <div>
+                                  <div>
+                                    <div>
+                                      <wex-playground
+                                        [a]="1"
+                                        [b]="2"
+                                        [c]="3"
+                                        [d]="4"
+                                        [e]="5"
+                                        [f]="6"
+                                        asd
+                                        asd
+                                        asd
+                                        asd
+                                        asd
+                                        asd
+                                      >
+                                      </wex-playground>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

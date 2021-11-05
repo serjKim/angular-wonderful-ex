@@ -1,0 +1,59 @@
+{
+  "name": "wonderful-ex",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "gen": "ng generate",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "eslint:fix": "eslint --fix --max-warnings 0 ./src",
+    "prettier:check": "prettier --write --config .prettierrc --check \"src/**/*.{ts,scss,html}\"",
+    "lint-staged": "lint-staged"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "~12.0.0",
+    "@angular/cdk": "^12.0.0",
+    "@angular/common": "~12.0.0",
+    "@angular/compiler": "~12.0.0",
+    "@angular/core": "~12.0.0",
+    "@angular/forms": "~12.0.0",
+    "@angular/material": "^12.0.0",
+    "@angular/platform-browser": "~12.0.0",
+    "@angular/platform-browser-dynamic": "~12.0.0",
+    "@angular/router": "~12.0.0",
+    "rxjs": "~6.6.0",
+    "tslib": "^2.1.0",
+    "zone.js": "~0.11.4"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~12.0.0",
+    "@angular-eslint/builder": "12.0.0",
+    "@angular-eslint/eslint-plugin": "^12.0.0",
+    "@angular-eslint/eslint-plugin-template": "^12.0.0",
+    "@angular-eslint/schematics": "12.0.0",
+    "@angular-eslint/template-parser": "12.0.0",
+    "@angular/cli": "~12.0.0",
+    "@angular/compiler-cli": "~12.0.0",
+    "@types/node": "^12.11.1",
+    "@typescript-eslint/eslint-plugin": "^4.24.0",
+    "@typescript-eslint/eslint-plugin-tslint": "^4.24.0",
+    "@typescript-eslint/parser": "^4.24.0",
+    "eslint": "^7.27.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard-with-typescript": "^20.0.0",
+    "eslint-plugin-import": "^2.23.3",
+    "eslint-plugin-jsdoc": "^34.8.2",
+    "lint-staged": "^11.0.0",
+    "prettier": "^2.3.0",
+    "typescript": "~4.2.3",
+    "husky": "^6.0.0"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,scss,html}": [
+      "prettier --write",
+      "eslint --fix --max-warnings 0"
+    ]
+  }
+}
