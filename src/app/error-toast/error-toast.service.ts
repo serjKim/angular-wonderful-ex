@@ -2,11 +2,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, OnDestroy } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
-import { CoreError, CoreErrorType, UnwrapService } from '../core';
+import { CoreError, UnwrapService } from '../core';
 
-type WriteError = (message: string, ...params: unknown[]) => void;
+type ErrorOutput = (message: string, ...params: unknown[]) => void;
 
-const WRITE_ERROR = new InjectionToken<WriteError>('Console.error caller', {
+const ERROR_OUTPUT = new InjectionToken<ErrorOutput>('Console.error caller', {
   providedIn: 'root',
   factory: () => console.error,
 });
@@ -20,7 +20,7 @@ export class ErrorToastService implements OnDestroy {
   constructor(
     private readonly snackBar: MatSnackBar,
     private readonly unwrapService: UnwrapService,
-    @Inject(WRITE_ERROR) private readonly writeError: WriteError,
+    @Inject(ERROR_OUTPUT) private readonly errorOutput: ErrorOutput,
   ) {}
 
   public init(): void {
@@ -31,28 +31,13 @@ export class ErrorToastService implements OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  private handleCoreError = (coreError: CoreError) => {
-    switch (coreError.type) {
-      case CoreErrorType.Unexpected:
-        this.writeError('Handled: ', coreError.err);
-        this.snackBar.open(coreError.err.message, 'Close');
-        break;
-      case CoreErrorType.HttpCall:
-        this.handleHttpCallError(coreError.err);
-        break;
-      default:
-        const unexpected: never = coreError;
-        console.error(unexpected);
-    }
-  };
-
-  private handleHttpCallError(err: HttpErrorResponse | Error) {
+  private handleCoreError = (err: CoreError) => {
     if (err instanceof HttpErrorResponse) {
-      this.writeError('Http response: ', err);
+      this.errorOutput('Http response: ', err);
       this.snackBar.open(`${err.status}: ${err.message}`, 'Close');
     } else {
-      this.writeError('Http (unknown error): ', err);
-      this.snackBar.open(`An error ocurred during http: ${err.message}`, 'Close');
+      this.errorOutput('Unexpected: ', err);
+      this.snackBar.open(`An error ocurred: ${err.message}`, 'Close');
     }
-  }
+  };
 }

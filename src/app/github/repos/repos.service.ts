@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
+import { coreError, isError, isPending } from '../../core';
 import { GithubService, Repos } from '../github.service';
-import { CoreError, isError, isPending } from '../../core';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +18,7 @@ export class ReposService {
       map((repos) => {
         if (!isError(repos) && !isPending(repos)) {
           if (repos.length < 10) {
-            return CoreError.unexpected(new Error('Length < 10'));
+            return coreError(new Error('Length < 10'));
           }
         }
         return repos;

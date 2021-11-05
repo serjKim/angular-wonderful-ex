@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CoreError, Pending, ResultError, WexHttpClient, WexHttpResult } from '../core';
+import { CoreResultError, Pending, WexHttpClient, WexHttpResult } from '../core';
 
 interface Repo {
   readonly name: string;
 }
 
-export type Repos = Observable<Repo[] | ResultError<CoreError> | Pending>;
+export type Repos = Observable<Repo[] | CoreResultError | Pending>;
 
 @Injectable({
   providedIn: 'root',

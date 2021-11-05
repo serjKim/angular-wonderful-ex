@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { startWith } from 'rxjs/operators';
+import { catchHttpError, CoreResultError } from './error';
 import { pending, Pending } from './pending';
-import { catchHttpError, CoreError, ResultError } from './error';
 
-export type WexHttpResult<T> = Observable<T | ResultError<CoreError> | Pending>;
+export type WexHttpResult<T> = Observable<T | CoreResultError | Pending>;
 
 @Injectable({ providedIn: 'root' })
 export class WexHttpClient {

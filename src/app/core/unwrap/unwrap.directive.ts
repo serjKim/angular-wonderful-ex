@@ -1,5 +1,5 @@
 import { Directive, Input, OnChanges, SimpleChange, TemplateRef, ViewContainerRef } from '@angular/core';
-import { CoreError, isError, ResultError } from '../error';
+import { CoreResultError, isError } from '../error';
 import { isPending, Pending } from '../pending';
 import { UnwrapService } from './unwrap.service';
 
@@ -22,7 +22,7 @@ export class UnwrapDirective<T> implements OnChanges {
   public pendingTemplate: TemplateRef<unknown> | null = null;
 
   @Input('wexUnwrap')
-  public value: T | ResultError<CoreError> | Pending | null = null;
+  public value: T | CoreResultError | Pending | null = null;
 
   constructor(
     private readonly templateRef: TemplateRef<UnwrapDirectiveContext<T | null>>,

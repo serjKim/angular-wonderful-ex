@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { interval, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CoreError, Pending, pending, ResultError, UnexpectedError } from './core';
+import { coreError, CoreResultError, Pending, pending } from './core';
 
-export type Roulette = number | ResultError<UnexpectedError> | Pending;
+export type Roulette = number | CoreResultError | Pending;
 
 @Injectable({ providedIn: 'root' })
 export class RouletteStorage {
@@ -14,7 +14,7 @@ export class RouletteStorage {
           return x;
         }
         if (x % 3 === 0) {
-          return CoreError.unexpected(new Error('Boom roulette!'));
+          return coreError(new Error('Boom roulette!'));
         }
         return pending();
       }),
