@@ -4,6 +4,6 @@ import { CoreError } from '../error';
 @Injectable({
   providedIn: 'root',
 })
-export class UnwrapService {
-  public readonly raiseError = new EventEmitter<CoreError>();
+export class CoreErrorEmitter {
+  public readonly emitter = new EventEmitter<CoreError>();
 }

@@ -1,7 +1,7 @@
 import { Directive, Input, OnChanges, SimpleChange, TemplateRef, ViewContainerRef } from '@angular/core';
 import { CoreResultError, isError } from '../error';
 import { isPending, Pending } from '../pending';
-import { UnwrapService } from './unwrap.service';
+import { CoreErrorEmitter } from './core-error-emitter';
 
 type DirectiveChanges<T> = {
   [name in keyof UnwrapDirective<T>]: SimpleChange;
@@ -27,7 +27,7 @@ export class UnwrapDirective<T> implements OnChanges {
   constructor(
     private readonly templateRef: TemplateRef<UnwrapDirectiveContext<T | null>>,
     private readonly viewContainer: ViewContainerRef,
-    private readonly unwrapService: UnwrapService,
+    private readonly errorEmitter: CoreErrorEmitter,
   ) {}
 
   public static ngTemplateContextGuard<T>(_: UnwrapDirective<T>, ctx: unknown): ctx is UnwrapDirectiveContext<T> {
@@ -61,7 +61,7 @@ export class UnwrapDirective<T> implements OnChanges {
         this.viewContainer.createEmbeddedView(this.errorTemplate, { value: this.value });
       }
 
-      this.unwrapService.raiseError.emit(this.value.err);
+      this.errorEmitter.emitter.emit(this.value.err);
     } else {
       this.viewContainer.clear();
       this.viewContainer.createEmbeddedView(this.templateRef, new UnwrapDirectiveContext(this.value));

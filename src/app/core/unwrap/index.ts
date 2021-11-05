@@ -1,2 +1,2 @@
 export * from './unwrap.directive';
-export * from './unwrap.service';
+export * from './core-error-emitter';

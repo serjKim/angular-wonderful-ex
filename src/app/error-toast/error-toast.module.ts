@@ -2,16 +2,16 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { ErrorToastService } from './error-toast.service';
+import { ErrorToastRegistrator } from './error-toast.service';
 
 @NgModule({
   declarations: [],
   imports: [CommonModule, MatSnackBarModule, BrowserAnimationsModule],
   exports: [],
-  providers: [ErrorToastService],
+  providers: [ErrorToastRegistrator],
 })
 export class ErrorToastModule {
-  constructor(private readonly errorToastService: ErrorToastService) {
-    this.errorToastService.init();
+  constructor(errorToastRegistrator: ErrorToastRegistrator) {
+    errorToastRegistrator.register();
   }
 }
