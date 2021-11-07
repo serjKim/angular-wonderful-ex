@@ -3,7 +3,7 @@
 ## Define index.ts for public api
 To use short paths, to easy refactor, reduces the file path changes.
 
-<span style="color: green;">Good:</span>
+✅ Good:
 ```typescript
 // module/logic.ts
 export const someLogic = () => { ...};
@@ -15,11 +15,11 @@ export * from './logic';
 import { someLogic } from './module';
 ```
 
-<span style="color: red;">Bad:</span>
+❌ Bad:
 
 ```typescript
 // consumer.ts
-import { someLogic } from './module/logic.ts';
+import { someLogic } from './module/logic';
 ```
 ## Display validation errors with `formGroup.touched`
 Combine `hasError` with `formGroup.touched`, It increases UX, reduces the 'noise' in the form.
@@ -69,12 +69,15 @@ or with template:
 <ng-template #pending> Loading... </ng-template>
 ```
 ## ResultError
-A http call might be completed with an error. To handle, add `catchHttpError` to the pipe before `startWith`.
+The Rxjs stream are completed when an error occurred within. You have to handle it by the `catchError` operator.
+
+Example:
+A http call might be completed with an error. To handle, add `catchCoreError` to the pipe before `startWith`.
 ```typescript
 const items$ = this.httpClient.get<T>(...).pipe(
-  catchHttpError(),
+  catchCoreError(),
   startWith(pending()),
-) // Observable<T | Pending | ResultError<HttpCallError>>
+) // Observable<T | Pending | ResultError<CoreError>
 ```
 Use the same `*wexUnwrap` to get `T`:
 ```html
@@ -99,7 +102,7 @@ or with templates:
 The `wex-http-client` service is already encapsulating the ones technics:
 Just use `request` method to call any http request:
 ```typescript
-this.httpClient.request(http => http.get<T>(...))
+this.httpClient.request(http => http.get<T>(...)) // Observable<T | CoreResultError | Pending>
 ```
 Under the hood it looks:
 ```typescript
@@ -107,8 +110,10 @@ public request<TResult>(
   builder: (httpClient: HttpClient) => Observable<TResult>,
 ): WexHttpResult<TResult> {
   return builder(this.http).pipe(
-    catchHttpError(),
+    catchCoreError(),
     startWith(pending()),
   );
 }
+
+type WexHttpResult<T> = Observable<T | CoreResultError | Pending>;
 ```
