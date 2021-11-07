@@ -69,7 +69,7 @@ or with template:
 <ng-template #pending> Loading... </ng-template>
 ```
 ## ResultError
-The Rxjs stream are completed when an error occurred within. You have to handle it by the `catchError` operator.
+The Rxjs streams are completed when an error occurred within. You have to handle it by the `catchError` operator.
 
 Example:
 A http call might be completed with an error. To handle, add `catchCoreError` to the pipe before `startWith`.
