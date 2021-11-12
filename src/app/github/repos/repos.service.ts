@@ -9,9 +9,11 @@ export interface SideEffectResult {
   entityId: number;
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable(
+  {
+    providedIn: 'root',
+}
+)
 export class ReposService {
   constructor(private readonly githubService: GithubService, private readonly wexHttpClient: WexHttpClient) {}
 
