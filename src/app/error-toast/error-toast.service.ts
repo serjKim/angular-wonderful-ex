@@ -52,13 +52,13 @@ export class ErrorToastRegistrator implements OnDestroy {
   ) {}
 
   public register(): void {
-    if(this.instance == null) {
+    if (this.instance == null) {
       this.instance = new ErrorToastService(this.snackBar, this.errorEmitter, this.errorOutput);
     }
   }
 
   public ngOnDestroy(): void {
-    if(this.instance != null) {
+    if (this.instance != null) {
       this.instance.destroy();
     }
   }

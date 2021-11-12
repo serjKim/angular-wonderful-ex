@@ -1,6 +1,6 @@
 <div>
   <label for="allowEditor">
-    <input type="checkbox" id="allowEditor" [(ngModel)]="allowEditor">
+    <input type="checkbox" id="allowEditor" [(ngModel)]="allowEditor" />
     Allow edit
   </label>
   <wex-editor *ngIf="allowEditor"></wex-editor>
@@ -15,7 +15,7 @@
   <div>List of repos:</div>
   <div *ngIf="s.pending">Loading...</div>
   <div *ngIf="s.error">Error occurred!</div>
-  <div *ngIf="repos">{{repos.length}}</div>
+  <div *ngIf="repos">{{ repos.length }}</div>
   <div *ngFor="let repo of repos">
     {{ repo.name }}
   </div>

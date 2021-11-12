@@ -4,10 +4,7 @@ import { isPending, Pending } from '../pending';
 import { CoreErrorEmitter } from './core-error-emitter';
 
 class UnwrapState {
-  constructor(
-    public readonly pending: boolean,
-    public readonly error: boolean,
-  ) {}
+  constructor(public readonly pending: boolean, public readonly error: boolean) {}
 }
 
 type DirectiveChanges<T> = {
@@ -15,11 +12,7 @@ type DirectiveChanges<T> = {
 };
 
 class UnwrapDirectiveContext<T> {
-  constructor(
-    public readonly $implicit: T | null,
-    public readonly state: UnwrapState,
-  ) {
-  }
+  constructor(public readonly $implicit: T | null, public readonly state: UnwrapState) {}
 }
 
 @Directive({

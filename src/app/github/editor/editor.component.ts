@@ -12,11 +12,9 @@ import { ReposService, SideEffectResult } from '../repos/repos.service';
 })
 export class EditorComponent {
   public readonly sideEffect$ = new Subject<Observable<SideEffectResult | CoreResultError | Pending>>();
-  public readonly createdEntity$ = this.sideEffect$.pipe(
-    exhaustMap(x => x),
-  );
+  public readonly createdEntity$ = this.sideEffect$.pipe(exhaustMap((x) => x));
 
-  constructor(private readonly reposService: ReposService) { }
+  constructor(private readonly reposService: ReposService) {}
 
   public doEffect(entityId: number | null | undefined): void {
     if (!entityId) {

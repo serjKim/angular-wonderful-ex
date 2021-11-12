@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "wonderful-ex": {
+    "angular-wonderful-ex": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -40,7 +40,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/wonderful-ex",
+            "outputPath": "dist/angular-wonderful-ex",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -93,10 +93,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "wonderful-ex:build:production"
+              "browserTarget": "angular-wonderful-ex:build:production"
             },
             "development": {
-              "browserTarget": "wonderful-ex:build:development"
+              "browserTarget": "angular-wonderful-ex:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -104,7 +104,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "wonderful-ex:build"
+            "browserTarget": "angular-wonderful-ex:build"
           }
         },
         "lint": {
@@ -119,7 +119,7 @@
       }
     }
   },
-  "defaultProject": "wonderful-ex",
+  "defaultProject": "angular-wonderful-ex",
   "cli": {
     "defaultCollection": "@angular-eslint/schematics"
   }

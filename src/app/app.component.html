@@ -2,7 +2,7 @@
 
 <ng-container *wexUnwrap="items$ | async; let items; state as state">
   <label for="allowLoad">
-    <input type="checkbox" id="allowLoad" [(ngModel)]="allowLoad">
+    <input type="checkbox" id="allowLoad" [(ngModel)]="allowLoad" />
     Allow load
   </label>
   <button (click)="onLoad()" [disabled]="state.pending || !allowLoad">Load</button>
@@ -13,7 +13,7 @@
 </ng-container>
 
 <label for="allowR">
-  <input type="checkbox" id="allowR" [(ngModel)]="allowRoulette">
+  <input type="checkbox" id="allowR" [(ngModel)]="allowRoulette" />
   Allow roulette
 </label>
 <div *ngIf="allowRoulette">

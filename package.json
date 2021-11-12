@@ -1,5 +1,5 @@
 {
-  "name": "wonderful-ex",
+  "name": "angular-wonderful-ex",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -9,7 +9,8 @@
     "watch": "ng build --watch --configuration development",
     "eslint:fix": "eslint --fix --max-warnings 0 ./src",
     "prettier:check": "prettier --write --config .prettierrc --check \"src/**/*.{ts,scss,html}\"",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "prepare": "husky install"
   },
   "private": true,
   "dependencies": {
