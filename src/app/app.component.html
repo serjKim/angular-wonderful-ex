@@ -1,16 +1,22 @@
 <div>{{ title }}</div>
 
-<ng-container *wexUnwrap="items$ | async; let items; pending: pending; error: error">
+<ng-container *wexUnwrap="items$ | async; let items; state as state">
+  <label for="allowLoad">
+    <input type="checkbox" id="allowLoad" [(ngModel)]="allowLoad">
+    Allow load
+  </label>
+  <button (click)="onLoad()" [disabled]="state.pending || !allowLoad">Load</button>
+  <ng-container *ngIf="state.pending">Loading...</ng-container>
+  <ng-container *ngIf="state.error">Error occurred!</ng-container>
   <div>Pending container</div>
-  {{ items }}
+  <div>{{ items }}</div>
 </ng-container>
 
-<ng-template #pending> Loading... </ng-template>
-<ng-template #error> Error occurred. </ng-template>
-
-<button (click)="onLoad()">Load</button>
-
-<div>
+<label for="allowR">
+  <input type="checkbox" id="allowR" [(ngModel)]="allowRoulette">
+  Allow roulette
+</label>
+<div *ngIf="allowRoulette">
   <h6>Roulette</h6>
   <ng-container *wexUnwrap="roulette$ | async; let roulette; pending: rPending; error: rError">
     <span>R: {{ roulette }}</span>

@@ -12,6 +12,8 @@ export class AppComponent {
   public readonly title = 'wonderful-ex';
   public readonly items$: Observable<Items>;
   public readonly roulette$: Observable<Roulette>;
+  public allowLoad = true;
+  public allowRoulette = false;
 
   constructor(private readonly storageService: StorageService, private readonly rouletteStorage: RouletteStorage) {
     this.items$ = storageService.getItems();

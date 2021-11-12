@@ -3,12 +3,23 @@ import { CoreResultError, isError } from '../error';
 import { isPending, Pending } from '../pending';
 import { CoreErrorEmitter } from './core-error-emitter';
 
+class UnwrapState {
+  constructor(
+    public readonly pending: boolean,
+    public readonly error: boolean,
+  ) {}
+}
+
 type DirectiveChanges<T> = {
   [name in keyof UnwrapDirective<T>]: SimpleChange;
 };
 
 class UnwrapDirectiveContext<T> {
-  constructor(public readonly $implicit: T) {}
+  constructor(
+    public readonly $implicit: T | null,
+    public readonly state: UnwrapState,
+  ) {
+  }
 }
 
 @Directive({
@@ -48,23 +59,29 @@ export class UnwrapDirective<T> implements OnChanges {
   }
 
   private render(): void {
+    const unwrapState = new UnwrapState(isPending(this.value), isError(this.value));
+
     if (isPending(this.value)) {
       this.viewContainer.clear();
 
       if (this.pendingTemplate) {
         this.viewContainer.createEmbeddedView(this.pendingTemplate);
+      } else {
+        this.viewContainer.createEmbeddedView(this.templateRef, new UnwrapDirectiveContext(null, unwrapState));
       }
     } else if (isError(this.value)) {
       this.viewContainer.clear();
 
       if (this.errorTemplate) {
-        this.viewContainer.createEmbeddedView(this.errorTemplate, { value: this.value });
+        this.viewContainer.createEmbeddedView(this.errorTemplate);
+      } else {
+        this.viewContainer.createEmbeddedView(this.templateRef, new UnwrapDirectiveContext(null, unwrapState));
       }
 
       this.errorEmitter.emitter.emit(this.value.err);
     } else {
       this.viewContainer.clear();
-      this.viewContainer.createEmbeddedView(this.templateRef, new UnwrapDirectiveContext(this.value));
+      this.viewContainer.createEmbeddedView(this.templateRef, new UnwrapDirectiveContext(this.value, unwrapState));
     }
   }
 }

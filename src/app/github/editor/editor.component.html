@@ -1,0 +1,7 @@
+<div>
+  <ng-container *wexUnwrap="createdEntity$ | async;let entity;state as state">
+    {{ entity?.entityId }}
+    <button (click)="doEffect(entity?.entityId)" [disabled]="state.pending">{{ entity?.entityId ? 'Edit' : 'Create' }}</button>
+    <wex-empty></wex-empty>
+  </ng-container>
+</div>

@@ -21,6 +21,15 @@ import { someLogic } from './module';
 // consumer.ts
 import { someLogic } from './module/logic';
 ```
+
+## Use nominal types
+
+Avoid primitive obsession
+
+✅ Good: TBD
+
+❌ Bad: TBD
+
 ## Display validation errors with `formGroup.touched`
 Combine `hasError` with `formGroup.touched`, It increases UX, reduces the 'noise' in the form.
 Don't use `[disabled]="formGroup.invalid"` it will confuse the user there isn't a clue to enable the button.
@@ -44,7 +53,6 @@ public onClick() {
   // ...
 }
 ```
-
 ## Use `pending` + `startWith` for loading objects
 ```typescript
 const items$ = this.httpClient.get<T>(...).pipe(
@@ -57,9 +65,18 @@ So, `items$` has one of states: `Pending` or `T`. You might unwrap `items$` to g
 ```html
 <ng-container *wexUnwrap="items$ | async; let items;">
   <h3>Pending container</h3>
-  {{ items }} <!-- T -->
+  {{ items }} <!-- T | null -->
 </ng-container>
 ```
+use `state.pending` to display progress state during loading:
+```html
+<ng-container *wexUnwrap="items$ | async; let items; state as s">
+  <h3>Pending container</h3>
+  <div *ngIf="s.pending">Loading...</div>
+  {{ items }} <!-- T | null -->
+</ng-container>
+```
+
 or with template:
 ```html
 <ng-container *wexUnwrap="items$ | async; let items; pending: pending">
@@ -68,7 +85,8 @@ or with template:
 </ng-container>
 <ng-template #pending> Loading... </ng-template>
 ```
-## ResultError
+The whole content will be replaced with `#pending` template.
+## CoreResultError
 The Rxjs streams are completed when an error occurred within. You have to handle it by the `catchError` operator.
 
 Example:
@@ -77,16 +95,26 @@ A http call might be completed with an error. To handle, add `catchCoreError` to
 const items$ = this.httpClient.get<T>(...).pipe(
   catchCoreError(),
   startWith(pending()),
-) // Observable<T | Pending | ResultError<CoreError>
+) // Observable<T | Pending | CoreResultError
 ```
 Use the same `*wexUnwrap` to get `T`:
 ```html
 <ng-container *wexUnwrap="items$ | async; let items;">
   <h3>Pending container</h3>
-  {{ items }} <!-- T -->
+  {{ items }} <!-- T | null -->
 </ng-container>
 ```
-`*wexUnwrap` handles both `ResultError` and `Pending` distinguishing T from.
+`*wexUnwrap` handles both `CoreResultError` and `Pending` distinguishing T from.
+
+use `state` to display progress and error states:
+```html
+<ng-container *wexUnwrap="items$ | async; let items; state as s">
+  <h3>Pending container</h3>
+  <div *ngIf="s.pending">Loading...</div>
+  <div *ngIf="s.error">Error.</div>
+  {{ items }} <!-- T | null -->
+</ng-container>
+```
 
 or with templates:
 ```html
@@ -98,7 +126,7 @@ or with templates:
 <ng-template #pending> Loading... </ng-template>
 <ng-template #error> Error occurred. </ng-template>
 ```
-## Use `pending` + `startWith` + `ResultError`
+## Use `WexHttpClient`
 The `wex-http-client` service is already encapsulating the ones technics:
 Just use `request` method to call any http request:
 ```typescript
@@ -116,4 +144,10 @@ public request<TResult>(
 }
 
 type WexHttpResult<T> = Observable<T | CoreResultError | Pending>;
+
+type CoreResultError =
+  | HttpResponseError
+  | Error
+  // and other types
+  ;
 ```
