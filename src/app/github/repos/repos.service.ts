@@ -6,7 +6,7 @@ import { GithubService, Repos } from '../github.service';
 import { WexHttpClient, WexHttpResult } from '../../core/wex-http-client';
 
 export interface SideEffectResult {
-  entityId: number;
+    entityId: number;
 }
 
 @Injectable(
