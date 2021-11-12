@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 import { coreError, isOk } from '../../core';
 import { GithubService, Repos } from '../github.service';
 import { WexHttpClient, WexHttpResult } from '../../core/wex-http-client';
 
 export interface SideEffectResult {
-    entityId: number;
+  readonly entityId: number;
 }
 
-@Injectable(
-  {
-    providedIn: 'root',
-}
-)
+@Injectable({
+  providedIn: 'root',
+})
 export class ReposService {
   constructor(private readonly githubService: GithubService, private readonly wexHttpClient: WexHttpClient) {}
 
@@ -34,7 +32,6 @@ export class ReposService {
   }
 
   public post(): WexHttpResult<SideEffectResult> {
-    return this.wexHttpClient.request(c =>
-        c.post<SideEffectResult>('https://myend.free.beeceptor.com/', {}));
+    return this.wexHttpClient.request((c) => c.post<SideEffectResult>('https://myend.free.beeceptor.com/', {}));
   }
 }
