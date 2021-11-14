@@ -15,7 +15,7 @@ export class AppComponent {
   public allowLoad = true;
   public allowRoulette = false;
 
-  constructor(private readonly storageService: StorageService, private readonly rouletteStorage: RouletteStorage) {
+  constructor(private readonly storageService: StorageService, rouletteStorage: RouletteStorage) {
     this.items$ = storageService.getItems();
     this.roulette$ = rouletteStorage.load();
   }

@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { CoreError } from '../error';
+import { CoreError } from '.';
 
 @Injectable({
   providedIn: 'root',

@@ -1,14 +1,13 @@
 import { Directive, Input, OnChanges, SimpleChange, TemplateRef, ViewContainerRef } from '@angular/core';
-import { CoreResultError, isError } from '../error';
-import { isPending, Pending } from '../pending';
-import { CoreErrorEmitter } from './core-error-emitter';
+import { CoreResult, isError, isPending } from '../result';
+import { CoreErrorEmitter } from '../error/core-error-emitter';
 
 class UnwrapState {
   constructor(public readonly pending: boolean, public readonly error: boolean) {}
 }
 
 type DirectiveChanges<T> = {
-  [name in keyof UnwrapDirective<T>]: SimpleChange;
+  [name in keyof UnwrapDirective<T>]?: SimpleChange;
 };
 
 class UnwrapDirectiveContext<T> {
@@ -26,7 +25,7 @@ export class UnwrapDirective<T> implements OnChanges {
   public pendingTemplate: TemplateRef<unknown> | null = null;
 
   @Input('wexUnwrap')
-  public value: T | CoreResultError | Pending | null = null;
+  public value: CoreResult<T> | null = null;
 
   constructor(
     private readonly templateRef: TemplateRef<UnwrapDirectiveContext<T | null>>,
@@ -43,9 +42,9 @@ export class UnwrapDirective<T> implements OnChanges {
     const errorTemplate = changes.errorTemplate;
     const pendingTemplate = changes.pendingTemplate;
     if (
-      val.previousValue !== val.currentValue ||
-      errorTemplate.previousValue !== errorTemplate.currentValue ||
-      pendingTemplate.previousValue !== pendingTemplate.currentValue
+      val?.previousValue !== val?.currentValue ||
+      errorTemplate?.previousValue !== errorTemplate?.currentValue ||
+      pendingTemplate?.previousValue !== pendingTemplate?.currentValue
     ) {
       this.render();
     }

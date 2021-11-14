@@ -181,7 +181,7 @@ module.exports = {
               "off"
           ],
           "comma-dangle": [
-              "error",
+              "warn",
               "always-multiline"
           ],
           "complexity": "off",

@@ -1,0 +1,10 @@
+<div>
+  <input type="text" [(ngModel)]="currentComment" />
+
+  <ng-container *wexUnwrap="createdEntity$ | async; state as state">
+    <button (click)="upsert(currentEntity)" [disabled]="state.pending">
+      {{ !!currentEntity ? 'Edit' : 'Create' }}
+    </button>
+    <button *ngIf="!!currentEntity" (click)="addNew()" [disabled]="state.pending">Add New</button>
+  </ng-container>
+</div>

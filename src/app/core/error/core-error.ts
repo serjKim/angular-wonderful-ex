@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { error, ResultError } from './result-error';
+import { error, ResultError } from '../result';
 
 // prettier-ignore
 export type CoreError =

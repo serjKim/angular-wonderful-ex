@@ -1,0 +1,7 @@
+<ng-container *wexUnwrap="entities$ | async; let entities; state as entitiesState">
+  <div *ngIf="entitiesState.pending">Entities loading...</div>
+  <div *ngFor="let item of entities; trackBy: trackByItem">
+    {{ item.entityId }} : {{ item.comment }} <button (click)="deleteItem(item)">Delete</button>
+    <button (click)="editItem(item)">Edit</button>
+  </div>
+</ng-container>

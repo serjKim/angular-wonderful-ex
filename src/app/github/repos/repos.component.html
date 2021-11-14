@@ -1,11 +1,3 @@
-<div>
-  <label for="allowEditor">
-    <input type="checkbox" id="allowEditor" [(ngModel)]="allowEditor" />
-    Allow edit
-  </label>
-  <wex-editor *ngIf="allowEditor"></wex-editor>
-</div>
-
 <mat-form-field>
   <mat-label>Search repos</mat-label>
   <input matInput type="text" [formControl]="searchControl" autocomplete="off" />

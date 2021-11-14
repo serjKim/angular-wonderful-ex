@@ -1,0 +1,11 @@
+<div>
+  <label for="allowEditor">
+    <input type="checkbox" id="allowEditor" [(ngModel)]="allowEditor" />
+    Allow edit
+  </label>
+</div>
+
+<ng-container *ngIf="allowEditor">
+  <wex-entities-list></wex-entities-list>
+  <router-outlet></router-outlet>
+</ng-container>

@@ -6,11 +6,9 @@ import { MatInputModule } from '@angular/material/input';
 import { CoreModule } from '../core';
 import { GithubRoutingModule } from './github-routing.module';
 import { ReposComponent } from './repos/repos.component';
-import { EditorComponent } from './editor/editor.component';
-import { EmptyComponent } from './empty/empty.component';
 
 @NgModule({
-  declarations: [ReposComponent, EditorComponent, EmptyComponent],
+  declarations: [ReposComponent],
   imports: [
     CommonModule,
     FormsModule,

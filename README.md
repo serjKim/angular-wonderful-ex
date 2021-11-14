@@ -87,7 +87,7 @@ or with template:
 ```
 The whole content will be replaced with `#pending` template.
 ## CoreResultError
-The Rxjs streams are completed when an error occurred within. You have to handle it by the `catchError` operator.
+The Rxjs streams are stopped once an error has occurred in. You have to handle it by the `catchError` operator.
 
 Example:
 A http call might be completed with an error. To handle, add `catchCoreError` to the pipe before `startWith`.
@@ -126,8 +126,8 @@ or with templates:
 <ng-template #pending> Loading... </ng-template>
 <ng-template #error> Error occurred. </ng-template>
 ```
-## Use `WexHttpClient`
-The `wex-http-client` service is already encapsulating the ones technics:
+## Use `CoreHttpClient`
+The `CoreHttpClient` service is already encapsulating the ones technics:
 Just use `request` method to call any http request:
 ```typescript
 this.httpClient.request(http => http.get<T>(...)) // Observable<T | CoreResultError | Pending>
@@ -136,14 +136,14 @@ Under the hood it looks:
 ```typescript
 public request<TResult>(
   builder: (httpClient: HttpClient) => Observable<TResult>,
-): WexHttpResult<TResult> {
+): CoreResult<TResult> {
   return builder(this.http).pipe(
     catchCoreError(),
     startWith(pending()),
   );
 }
 
-type WexHttpResult<T> = Observable<T | CoreResultError | Pending>;
+type CoreResult<T> = Observable<T | CoreResultError | Pending>;
 
 type CoreResultError =
   | HttpResponseError

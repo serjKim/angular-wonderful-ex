@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { interval, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { coreError, CoreResultError, Pending, pending } from './core';
+import { coreError, CoreResult, pending } from './core';
 
-export type Roulette = number | CoreResultError | Pending;
+export type Roulette = CoreResult<number>;
 
 @Injectable({ providedIn: 'root' })
 export class RouletteStorage {
