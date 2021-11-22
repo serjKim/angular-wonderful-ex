@@ -3,7 +3,7 @@
   <input matInput type="text" [formControl]="searchControl" autocomplete="off" />
 </mat-form-field>
 
-<ng-container *wexUnwrap="repos$ | async; let repos; state as s; error: output; pending: loading">
+<ng-container *wexUnwrap="repos$ | async as repos; state as s; error: output; pending: loading">
   <div>List of repos:</div>
   <div *ngIf="s.pending">Loading...</div>
   <div *ngIf="s.error">Error occurred!</div>

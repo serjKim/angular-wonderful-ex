@@ -11,7 +11,7 @@ type DirectiveChanges<T> = {
 };
 
 class UnwrapDirectiveContext<T> {
-  constructor(public readonly $implicit: T | null, public readonly state: UnwrapState) {}
+  constructor(public readonly wexUnwrap: T | null, public readonly state: UnwrapState) {}
 }
 
 @Directive({

@@ -99,7 +99,7 @@ const items$ = this.httpClient.get<T>(...).pipe(
 ```
 Use the same `*wexUnwrap` to get `T`:
 ```html
-<ng-container *wexUnwrap="items$ | async; let items;">
+<ng-container *wexUnwrap="items$ | async as items;">
   <h3>Pending container</h3>
   {{ items }} <!-- T | null -->
 </ng-container>
@@ -108,7 +108,7 @@ Use the same `*wexUnwrap` to get `T`:
 
 use `state` to display progress and error states:
 ```html
-<ng-container *wexUnwrap="items$ | async; let items; state as s">
+<ng-container *wexUnwrap="items$ | async as items; state as s">
   <h3>Pending container</h3>
   <div *ngIf="s.pending">Loading...</div>
   <div *ngIf="s.error">Error.</div>
@@ -118,7 +118,7 @@ use `state` to display progress and error states:
 
 or with templates:
 ```html
-<ng-container *wexUnwrap="items$ | async; let items; pending: pending; error: error">
+<ng-container *wexUnwrap="items$ | async as items; pending: pending; error: error">
   <div>Pending container</div>
   {{ items }}
 </ng-container>
