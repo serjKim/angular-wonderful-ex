@@ -95,7 +95,7 @@ A http call might be completed with an error. To handle, add `catchCoreError` to
 const items$ = this.httpClient.get<T>(...).pipe(
   catchCoreError(),
   startWith(pending()),
-) // Observable<T | Pending | CoreResultError
+) // Observable<T | Pending | CoreResultError>
 ```
 Use the same `*wexUnwrap` to get `T`:
 ```html

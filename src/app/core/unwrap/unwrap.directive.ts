@@ -1,6 +1,6 @@
 import { Directive, Input, OnChanges, SimpleChange, TemplateRef, ViewContainerRef } from '@angular/core';
 import { CoreResult, isError, isPending } from '../result';
-import { CoreErrorEmitter } from '../error/core-error-emitter';
+import { CoreErrorEmitter } from '../error';
 
 class UnwrapState {
   constructor(public readonly pending: boolean, public readonly error: boolean) {}

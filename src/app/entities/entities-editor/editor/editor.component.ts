@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { SideEffect } from '../../entities-http';
+import { Entities } from '../../entities-main/entities';
 import { EntitiesStorage } from '../../entities-main/entities-storage';
 
 @Component({
@@ -18,6 +19,9 @@ export class EditorComponent {
     }
   }
 
+  @Input()
+  public entities: Entities | null = null;
+
   public readonly createdEntity$ = this.entitiesStorage.createdEntity;
   public currentEntity: SideEffect | null = null;
   public currentComment = '';
@@ -28,7 +32,7 @@ export class EditorComponent {
     if (!e) {
       this.entitiesStorage.create(this.currentComment);
     } else {
-      this.entitiesStorage.update(e.entityId, this.currentComment);
+      this.entities?.update(e.entityId, this.currentComment);
     }
   }
 

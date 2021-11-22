@@ -1,4 +1,4 @@
-const PENDING = Symbol();
+const PENDING = Symbol('Pending.');
 
 export class Pending {
   public readonly [PENDING] = true;

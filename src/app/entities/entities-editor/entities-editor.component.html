@@ -1,1 +1,5 @@
-<wex-editor *wexUnwrap="currentEntity$ | async; let entity" [entity]="entity"></wex-editor>
+<wex-editor
+  *wexUnwrap="editedEntity$ | async; let entity"
+  [entity]="entity"
+  [entities]="entities$ | async"
+></wex-editor>

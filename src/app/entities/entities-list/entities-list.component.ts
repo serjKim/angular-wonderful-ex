@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { SideEffect } from '../entities-http';
 import { Entities } from '../entities-main/entities';
 import { EntitiesStorage } from '../entities-main/entities-storage';
@@ -11,16 +12,14 @@ import { EntitiesStorage } from '../entities-main/entities-storage';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EntitiesListComponent {
-  public readonly entities$ = this.entities.entities;
+  public readonly entitiesCollection$: Observable<Entities>;
 
-  constructor(
-    private readonly entitiesStorage: EntitiesStorage,
-    private readonly entities: Entities,
-    private readonly router: Router,
-  ) {}
+  constructor(entitiesStorage: EntitiesStorage, private readonly router: Router) {
+    this.entitiesCollection$ = entitiesStorage.entities;
+  }
 
-  public deleteItem(e: SideEffect): void {
-    this.entitiesStorage.delete(e);
+  public deleteItem(entities: Entities, e: SideEffect): void {
+    entities.remove(e);
   }
 
   public async editItem(e: SideEffect): Promise<void> {

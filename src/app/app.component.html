@@ -9,7 +9,7 @@
   <ng-container *ngIf="state.pending">Loading...</ng-container>
   <ng-container *ngIf="state.error">Error occurred!</ng-container>
   <div>Pending container</div>
-  <div>{{ items }}</div>
+  <div>{{ items | json }}</div>
 </ng-container>
 
 <label for="allowR">

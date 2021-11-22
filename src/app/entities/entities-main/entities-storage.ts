@@ -1,5 +1,5 @@
-import { Host, Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { exhaustMap, tap } from 'rxjs/operators';
 import { CoreResult, isOk } from '../../core';
 import { EntitiesHttp, SideEffect } from '../entities-http';
@@ -8,9 +8,13 @@ import { Entities } from './entities';
 @Injectable()
 export class EntitiesStorage {
   public readonly createdEntity: Observable<CoreResult<SideEffect>>;
-  private readonly sideEffect$ = new Subject<Observable<CoreResult<SideEffect>>>();
+  public readonly entities: Observable<Entities>;
 
-  constructor(@Host() private readonly entities: Entities, private readonly reposService: EntitiesHttp) {
+  private readonly sideEffect$ = new Subject<Observable<CoreResult<SideEffect>>>();
+  private readonly entities$ = new BehaviorSubject(new Entities());
+
+  constructor(private readonly reposService: EntitiesHttp) {
+    this.entities = this.entities$.asObservable();
     this.createdEntity = this.sideEffect$.pipe(
       exhaustMap((x) => x),
       tap(this.addEntity),
@@ -21,17 +25,13 @@ export class EntitiesStorage {
     this.sideEffect$.next(this.reposService.post(comment));
   }
 
-  public delete(item: SideEffect): void {
-    this.entities.remove(item);
-  }
-
-  public update(seId: number, comment: string): void {
-    this.entities.update(seId, comment);
+  public reload(): void {
+    this.entities$.next(new Entities());
   }
 
   private addEntity = (se: CoreResult<SideEffect>): void => {
     if (isOk(se)) {
-      this.entities.add(se);
+      this.entities$.value.add(se);
     }
   };
 }

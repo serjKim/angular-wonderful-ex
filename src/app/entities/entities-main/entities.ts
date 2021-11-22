@@ -1,10 +1,8 @@
-import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { delay, startWith, tap } from 'rxjs/operators';
-import { Pending, pending } from '../../core';
+import { pending, Pending } from '../../core';
 import { SideEffect } from '../entities-http';
 
-@Injectable()
 export class Entities {
   public readonly entities: Observable<SideEffect[] | Pending>;
   private readonly entities$ = new BehaviorSubject<SideEffect[]>([

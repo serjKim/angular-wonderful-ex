@@ -1,4 +1,4 @@
-const ERROR_KEY = Symbol();
+const ERROR_KEY = Symbol('ResultError.');
 
 export class ResultError<T> {
   public readonly [ERROR_KEY] = true;
