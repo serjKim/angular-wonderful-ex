@@ -63,14 +63,14 @@ The stream will emit `Pending` while T is loading. It's useful to display a prog
 ## Unwrap directive
 So, `items$` has one of states: `Pending` or `T`. You might unwrap `items$` to get only `T`:
 ```html
-<ng-container *wexUnwrap="items$ | async; let items;">
+<ng-container *wexUnwrap="items$ | async as items">
   <h3>Pending container</h3>
   {{ items }} <!-- T | null -->
 </ng-container>
 ```
 use `state.pending` to display progress state during loading:
 ```html
-<ng-container *wexUnwrap="items$ | async; let items; state as s">
+<ng-container *wexUnwrap="items$ | async as items; state as s">
   <h3>Pending container</h3>
   <div *ngIf="s.pending">Loading...</div>
   {{ items }} <!-- T | null -->
@@ -79,7 +79,7 @@ use `state.pending` to display progress state during loading:
 
 or with template:
 ```html
-<ng-container *wexUnwrap="items$ | async; let items; pending: pending">
+<ng-container *wexUnwrap="items$ | async as items; pending: pending">
   <h3>Pending container</h3>
   {{ items }}
 </ng-container>
