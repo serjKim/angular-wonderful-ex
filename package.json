@@ -9,6 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "jest",
     "test:watch": "jest --watch",
+    "eslint": "eslint --max-warnings 0 ./src",
     "eslint:fix": "eslint --fix --max-warnings 0 ./src",
     "prettier:check": "prettier --write --config .prettierrc --check \"src/**/*.{ts,scss,html}\"",
     "lint-staged": "lint-staged",
