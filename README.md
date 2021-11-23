@@ -1,3 +1,5 @@
+![example workflow](https://github.com/serjKim/angular-wonderful-ex/actions/workflows/node.js.yml/badge.svg)
+
 # Guidelines
 
 ## Define index.ts for public api
