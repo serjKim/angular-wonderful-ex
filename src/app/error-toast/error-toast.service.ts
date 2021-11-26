@@ -34,9 +34,12 @@ class ErrorToastService {
     if (err instanceof HttpErrorResponse) {
       this.errorOutput('Http response: ', err);
       this.snackBar.open(`${err.status}: ${err.message}`, 'Close');
-    } else {
+    } else if (err instanceof Error) {
       this.errorOutput('Unexpected: ', err);
       this.snackBar.open(`An error ocurred: ${err.message}`, 'Close');
+    } else {
+      const unhandledErrorType: never = err;
+      throw new Error(unhandledErrorType);
     }
   };
 }
