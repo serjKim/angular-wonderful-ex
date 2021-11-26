@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, Observable } from 'rxjs';
 import { map, mergeMap, tap } from 'rxjs/operators';
 import { CoreResult, isOk } from '../../core';
-import { SideEffect } from '../entities-http';
 import { EntitiesStorage } from '../entities-main/entities-storage';
+import { SideEffect } from '../models';
 import { mapEntityId } from '../routing-data';
 
 @Injectable()

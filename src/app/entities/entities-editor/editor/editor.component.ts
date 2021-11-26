@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { SideEffect } from '../../entities-http';
 import { Entities } from '../../entities-main/entities';
 import { EntitiesStorage } from '../../entities-main/entities-storage';
+import { SideEffect } from '../../models';
 
 @Component({
   selector: 'wex-editor',

@@ -2,11 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay, map, startWith } from 'rxjs/operators';
 import { catchCoreError, CoreHttpClient, CoreResult, pending } from '../core';
-
-export interface SideEffect {
-  readonly entityId: number;
-  readonly comment: string;
-}
+import { EntityId, SideEffect } from './models';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +17,7 @@ export class EntitiesHttp {
     //   ));
     return of(new Date().valueOf()).pipe(
       delay(400),
-      map((entityId) => ({ entityId, comment })),
+      map((entityId) => ({ entityId: EntityId.parse(entityId), comment })),
       startWith(pending()),
       catchCoreError(),
     );

@@ -5,3 +5,4 @@ export * from './unwrap';
 export * from './core-http-client';
 export * from './result/is-ok';
 export * from './result';
+export * from './nominal';

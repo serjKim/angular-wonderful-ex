@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { exhaustMap, tap } from 'rxjs/operators';
 import { CoreResult, isOk } from '../../core';
-import { EntitiesHttp, SideEffect } from '../entities-http';
+import { EntitiesHttp } from '../entities-http';
+import { SideEffect } from '../models';
 import { Entities } from './entities';
 
 @Injectable()
