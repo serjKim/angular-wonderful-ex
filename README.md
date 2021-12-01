@@ -3,7 +3,7 @@
 ## Define index.ts for public api
 To use short paths, to easy refactor, reduces the file path changes.
 
-✅ Good:
+✅ Good
 ```typescript
 // module/logic.ts
 export const someLogic = () => { ...};
@@ -15,7 +15,7 @@ export * from './logic';
 import { someLogic } from './module';
 ```
 
-❌ Bad:
+❌ Bad
 
 ```typescript
 // consumer.ts
@@ -24,11 +24,74 @@ import { someLogic } from './module/logic';
 
 ## Use nominal types
 
-Avoid primitive obsession
+Avoid primitive obsession.
 
-✅ Good: TBD
+✅ Good
+```typescript
+type UserId = Nominal<'user.userId', number>;
+type RoleId = Nominal<'user.roleId', number>;
 
-❌ Bad: TBD
+function foo(userId: UserId, roleId: RoleId) {}
+```
+
+❌ Bad
+```typescript
+function foo(userId: number, roleId: number) {}
+```
+
+### **How to use**
+
+1. Define a nominal type using the `Nominal` helper.
+```typescript
+type UserId = Nominal<'user.userId', number>;
+```
+2. Define a parser with validation and so on.
+```typescript
+const UserId = {
+  parse(x: unknown) {
+    // Validate x...
+    return x as UserId;
+  },
+} as const;
+```
+Better is to put the `parse` to a const object named as well as `UserId`, hence there would be only single import in the consumer's code:
+```typescript
+import { UserId } from './user-id'
+
+const userId = UserId.parse(1);
+
+function foo(userId: UserId) {}
+```
+instead of
+```typescript
+import { UserId, parseUserId } from './user-id'
+
+const userId = parseUserId(1);
+
+function foo(userId: UserId) {}
+```
+### **Properties**
+1. Allows to cast to the underlying type.
+```typescript
+const n: number = userId; // Ok      it refers to a number (kind of Covariance),
+const userId: UserId = 1; // Error   but not vice versa
+```
+2. Protects from passing invalid values.
+```typescript
+const userId = UserId.parse(1);
+const roleId = RoleId.parse(100);
+
+function foo(userId: UserId, roleId: RoleId) {}
+
+foo(userId, roleId); // Ok
+foo(roleId, userId); // Error
+foo(-1, 0);          // Error
+```
+3. Zero-cost abstraction.
+```javascript
+// compiled js:
+const roleId = 100; // After compilation it's just value
+```
 
 ## Display validation errors with `formGroup.touched`
 Combine `hasError` with `formGroup.touched`, It increases UX, reduces the 'noise' in the form.
@@ -126,21 +189,18 @@ or with templates:
 <ng-template #pending> Loading... </ng-template>
 <ng-template #error> Error occurred. </ng-template>
 ```
-## Use `CoreHttpClient`
-The `CoreHttpClient` service is already encapsulating the ones technics:
-Just use `request` method to call any http request:
+## Use `wrap`
+The `wrap` is already encapsulating the ones technics:
+Just add one to any http request:
 ```typescript
-this.httpClient.request(http => http.get<T>(...)) // Observable<T | CoreResultError | Pending>
+return this.httpClient.http
+  .get<T>(...) // Observable<T>
+  .pipe(wrap()); // Observable<T | CoreResultError | Pending>
 ```
 Under the hood it looks:
 ```typescript
-public request<TResult>(
-  builder: (httpClient: HttpClient) => Observable<TResult>,
-): CoreResult<TResult> {
-  return builder(this.http).pipe(
-    catchCoreError(),
-    startWith(pending()),
-  );
+function wrap<T>(): OperatorFunction<T, CoreResult<T>> {
+  return pipe(catchCoreError(), startWith(pending()));
 }
 
 type CoreResult<T> = Observable<T | CoreResultError | Pending>;
@@ -150,4 +210,10 @@ type CoreResultError =
   | Error
   // and other types
   ;
+```
+
+## Use ```wrapAsync``` with promise
+This is a non-cancelable version of wrap
+```typescript
+wrapAsync(() => this.http.post<T>(...).toPromise()) // Observable<T | CoreResultError | Pending>
 ```

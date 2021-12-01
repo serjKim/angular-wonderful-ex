@@ -1,15 +1,20 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { defer, Observable, OperatorFunction, pipe } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { catchCoreError } from './error';
-import { CoreResult } from './result';
-import { pending } from './result/pending';
+import { CoreResult, pending } from './result';
 
-@Injectable({ providedIn: 'root' })
-export class CoreHttpClient {
-  constructor(private readonly http: HttpClient) {}
-  public request<TResult>(builder: (httpClient: HttpClient) => Observable<TResult>): Observable<CoreResult<TResult>> {
-    return builder(this.http).pipe(catchCoreError(), startWith(pending()));
-  }
+/**
+ * Wraps T with CoreResult
+ */
+export function wrap<T>(): OperatorFunction<T, CoreResult<T>> {
+  return pipe(catchCoreError(), startWith(pending()));
+}
+
+/**
+ * Promise (Non-cancelable) version of wrap
+ *
+ * @see {@link wrap}
+ */
+export function wrapAsync<TResult>(builder: () => Promise<TResult>): Observable<CoreResult<TResult>> {
+  return defer(() => builder()).pipe(catchCoreError(), startWith(pending()));
 }

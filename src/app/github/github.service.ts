@@ -1,7 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CoreHttpClient, CoreResult } from '../core';
+import { CoreResult, wrap } from '../core';
 
 interface Repo {
   readonly name: string;
@@ -24,10 +25,11 @@ export class GithubService {
     );
   }
   */
-  constructor(private readonly http: CoreHttpClient) {}
+  constructor(private readonly http: HttpClient) {}
   public search(term: string): Repos {
-    return this.http.request((c) =>
-      c.get<{ items: Repo[] }>(`https://api.github.com/search/repositories?q=${term}`).pipe(map((res) => res.items)),
+    return this.http.get<{ items: Repo[] }>(`https://api.github.com/search/repositories?q=${term}`).pipe(
+      map((res) => res.items),
+      wrap(),
     );
   }
 }

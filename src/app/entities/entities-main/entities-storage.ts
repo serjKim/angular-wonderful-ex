@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { exhaustMap, tap } from 'rxjs/operators';
+import { exhaustMap } from 'rxjs/operators';
 import { CoreResult, isOk } from '../../core';
 import { EntitiesHttp } from '../entities-http';
 import { SideEffect } from '../models';
@@ -16,14 +16,11 @@ export class EntitiesStorage {
 
   constructor(private readonly reposService: EntitiesHttp) {
     this.entities = this.entities$.asObservable();
-    this.createdEntity = this.sideEffect$.pipe(
-      exhaustMap((x) => x),
-      tap(this.addEntity),
-    );
+    this.createdEntity = this.sideEffect$.pipe(exhaustMap((x) => x));
   }
 
   public create(comment: string): void {
-    this.sideEffect$.next(this.reposService.post(comment));
+    this.sideEffect$.next(this.reposService.post(comment, this.addEntity));
   }
 
   public reload(): void {
