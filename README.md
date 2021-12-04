@@ -215,7 +215,7 @@ type CoreResultError =
 ```
 
 ## Use ```wrapAsync``` with promise
-This is a non-cancelable version of wrap
+The non-cancelable version of wrap. It could be useful for side effects, like a entity creating.
 ```typescript
 wrapAsync(() => this.http.post<T>(...).toPromise()) // Observable<T | CoreResultError | Pending>
 ```
