@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Roulette, RouletteStorage } from './roulette-storage.service';
-import { Items, StorageService } from './storage.service';
+import { Roulette, RouletteStorage } from './examples/roulette-storage.service';
+import { Items, StorageService } from './examples/storage.service';
 
 @Component({
   selector: 'wex-root',

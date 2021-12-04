@@ -1,4 +1,4 @@
-import { error, isError, Nominal, ResultError } from '../../core';
+import { error, isError, Nominal, ResultError } from '../../../core';
 
 export type EntityId = Nominal<number, 'entities.side-effect.entityId'>;
 

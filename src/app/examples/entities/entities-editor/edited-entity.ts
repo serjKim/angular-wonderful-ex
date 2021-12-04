@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, Observable } from 'rxjs';
 import { map, mergeMap, tap } from 'rxjs/operators';
-import { CoreResult, isOk } from '../../core';
+import { CoreResult, isOk } from '../../../core';
 import { EntitiesStorage } from '../entities-main/entities-storage';
 import { SideEffect } from '../models';
 import { mapEntityId } from '../routing-data';

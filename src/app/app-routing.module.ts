@@ -4,12 +4,12 @@ import { NgModule } from '@angular/core';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./github').then((m) => m.GithubModule),
+    loadChildren: () => import('./examples/github').then((m) => m.GithubModule),
     pathMatch: 'full',
   },
   {
     path: 'entities',
-    loadChildren: () => import('./entities').then((m) => m.EntitiesModule),
+    loadChildren: () => import('./examples/entities').then((m) => m.EntitiesModule),
   },
 ];
 

@@ -45,7 +45,7 @@ class ErrorToastService {
 }
 
 @Injectable()
-export class ErrorToastRegistrator implements OnDestroy {
+export class ErrorToastHost implements OnDestroy {
   private instance: ErrorToastService | null = null;
 
   constructor(

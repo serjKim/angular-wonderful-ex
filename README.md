@@ -126,7 +126,7 @@ const items$ = this.httpClient.get<T>(...).pipe(
 ```
 The stream will emit `Pending` while T is loading. It's useful to display a progress bar or placeholder.
 ## Unwrap directive
-So, `items$` has one of states: `Pending` or `T`. You might unwrap `items$` to get only `T`:
+So, `items$` has one of states: `Pending` or `T`. You might want to unwrap `items$` to get only `T`:
 ```html
 <ng-container *wexUnwrap="items$ | async as items">
   <h3>Pending container</h3>

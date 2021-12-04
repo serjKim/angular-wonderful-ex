@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { defer, Observable, of, Subject } from 'rxjs';
 import { delay, map, startWith, switchMap } from 'rxjs/operators';
-import { catchCoreError, CoreError, Pending, pending, ResultError } from './core';
+import { catchCoreError, CoreError, Pending, pending, ResultError } from '../core';
 
 // prettier-ignore
 export type Items =

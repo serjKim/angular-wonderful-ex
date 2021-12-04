@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core';
 import { ErrorToastModule } from './error-toast';
 import { GlobalErrorHandler } from './global-error.handler';
-import { PlaygroundComponent } from './playground/playground.component';
+import { PlaygroundComponent } from './examples/playground/playground.component';
 
 @NgModule({
   declarations: [AppComponent, PlaygroundComponent],

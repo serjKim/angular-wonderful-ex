@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { exhaustMap } from 'rxjs/operators';
-import { CoreResult, isOk } from '../../core';
+import { CoreResult, isOk } from '../../../core';
 import { EntitiesHttp } from '../entities-http';
 import { SideEffect } from '../models';
 import { Entities } from './entities';

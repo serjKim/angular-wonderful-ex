@@ -1,6 +1,6 @@
 import { BehaviorSubject, Observable } from 'rxjs';
 import { delay, startWith, tap } from 'rxjs/operators';
-import { pending, Pending } from '../../core';
+import { pending, Pending } from '../../../core';
 import { EntityId, SideEffect } from '../models';
 
 export class Entities {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
-import { coreError, isOk } from '../../core';
+import { coreError, isOk } from '../../../core';
 import { GithubService, Repos } from '../github.service';
 
 @Injectable({

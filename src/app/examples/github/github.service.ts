@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CoreResult, wrap } from '../core';
+import { CoreResult, wrap } from '../../core';
 
 interface Repo {
   readonly name: string;
