@@ -219,3 +219,13 @@ This is a non-cancelable version of wrap
 ```typescript
 wrapAsync(() => this.http.post<T>(...).toPromise()) // Observable<T | CoreResultError | Pending>
 ```
+Under the hood:
+```typescript
+function wrapAsync<TResult>(builder: () => Promise<TResult>): Observable<CoreResult<TResult>> {
+  return defer(() => builder())
+    .pipe(
+      catchCoreError(),
+      startWith(pending())
+    );
+}
+```
