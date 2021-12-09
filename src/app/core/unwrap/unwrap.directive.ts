@@ -42,12 +42,19 @@ export class UnwrapDirective<T> implements OnChanges {
     const errorTemplate = changes.errorTemplate;
     const pendingTemplate = changes.pendingTemplate;
     if (
-      val?.previousValue !== val?.currentValue ||
+      this.valueChanged(val) ||
       errorTemplate?.previousValue !== errorTemplate?.currentValue ||
       pendingTemplate?.previousValue !== pendingTemplate?.currentValue
     ) {
       this.render();
     }
+  }
+
+  private valueChanged(val: SimpleChange | undefined): boolean {
+    if (isPending(val?.previousValue) && isPending(val?.currentValue)) {
+      return false;
+    }
+    return val?.previousValue !== val?.currentValue;
   }
 
   private render(): void {
