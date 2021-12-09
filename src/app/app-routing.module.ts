@@ -11,6 +11,10 @@ const routes: Routes = [
     path: 'entities',
     loadChildren: () => import('./examples/entities').then((m) => m.EntitiesModule),
   },
+  {
+    path: '**',
+    redirectTo: '/',
+  },
 ];
 
 @NgModule({
