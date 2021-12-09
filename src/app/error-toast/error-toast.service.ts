@@ -27,21 +27,21 @@ class ErrorToastService {
   }
 
   private init(): void {
-    this.subscription.add(this.errorEmitter.emitter.subscribe(this.handleCoreError));
+    this.subscription.add(
+      this.errorEmitter.emitter.subscribe((x) => {
+        this.handleCoreError(x);
+      }),
+    );
   }
 
-  private handleCoreError = (err: CoreError) => {
+  private handleCoreError(err: CoreError) {
     if (err instanceof HttpErrorResponse) {
-      this.errorOutput('Http response: ', err);
       this.snackBar.open(`${err.status}: ${err.message}`, 'Close');
-    } else if (err instanceof Error) {
-      this.errorOutput('Unexpected: ', err);
-      this.snackBar.open(`An error ocurred: ${err.message}`, 'Close');
     } else {
-      const unhandledErrorType: never = err;
-      throw new Error(unhandledErrorType);
+      this.snackBar.open(`An error ocurred: ${err?.message ?? err}`, 'Close');
     }
-  };
+    this.errorOutput('Handled: ', err);
+  }
 }
 
 @Injectable()

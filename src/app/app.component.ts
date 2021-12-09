@@ -23,4 +23,9 @@ export class AppComponent {
   public onLoad(): void {
     this.storageService.load();
   }
+
+  public raiseError(): void {
+    // eslint-disable-next-line no-throw-literal
+    throw 111;
+  }
 }
