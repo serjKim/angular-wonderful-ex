@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Entities } from '../../entities-main/entities';
 import { EntitiesStorage } from '../../entities-main/entities-storage';
@@ -23,6 +24,7 @@ export class EditorComponent {
   public entities: Entities | null = null;
 
   public readonly createdEntity$ = this.entitiesStorage.createdEntity;
+  public readonly confirmationControl = new FormControl(true);
   public currentEntity: SideEffect | null = null;
   public currentComment = '';
 
@@ -30,7 +32,7 @@ export class EditorComponent {
 
   public upsert(e: SideEffect | null): void {
     if (!e) {
-      this.entitiesStorage.create(this.currentComment);
+      this.entitiesStorage.create(this.currentComment, this.confirmationControl.value);
     } else {
       this.entities?.update(e.entityId, this.currentComment);
     }

@@ -6,5 +6,9 @@
       {{ !!currentEntity ? 'Edit' : 'Create' }}
     </button>
     <button *ngIf="!!currentEntity" (click)="addNew()" [disabled]="state.pending">Add New</button>
+    <label for="confirmation">
+      <input type="checkbox" id="confirmation" [formControl]="confirmationControl" />
+      Confirmation
+    </label>
   </ng-container>
 </div>
