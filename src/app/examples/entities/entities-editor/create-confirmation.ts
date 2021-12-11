@@ -9,7 +9,7 @@ import { CreateDialogComponent } from './create-dialog/create-dialog.component';
 export class CreateConfirmation {
   constructor(public readonly dialog: MatDialog) {}
 
-  public openDialog(reason: string): Observable<boolean | null> {
+  public openDialog(reason: string): Observable<boolean> {
     return new Observable((subscribe) => {
       const instanceDialog = this.dialog.open<CreateDialogComponent, string, boolean>(CreateDialogComponent, {
         hasBackdrop: false,
@@ -18,7 +18,7 @@ export class CreateConfirmation {
       const subscription = instanceDialog.afterClosed().subscribe(subscribe);
       return () => {
         subscription.unsubscribe();
-        instanceDialog.close();
+        instanceDialog.close(false);
       };
     });
   }
