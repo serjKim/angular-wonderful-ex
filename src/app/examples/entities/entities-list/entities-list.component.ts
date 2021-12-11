@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AppRouter } from 'src/app/app-router';
 import { Entities } from '../entities-main/entities';
 import { EntitiesStorage } from '../entities-main/entities-storage';
 import { SideEffect } from '../models';
@@ -14,7 +14,7 @@ import { SideEffect } from '../models';
 export class EntitiesListComponent {
   public readonly entitiesCollection$: Observable<Entities>;
 
-  constructor(entitiesStorage: EntitiesStorage, private readonly router: Router, private ar: ActivatedRoute) {
+  constructor(entitiesStorage: EntitiesStorage, private appRouter: AppRouter) {
     this.entitiesCollection$ = entitiesStorage.entities;
   }
 
@@ -22,8 +22,8 @@ export class EntitiesListComponent {
     entities.remove(e);
   }
 
-  public async editItem(e: SideEffect): Promise<void> {
-    await this.router.navigate([e.entityId.toString()], { relativeTo: this.ar });
+  public editItem(e: SideEffect): void {
+    void this.appRouter.editEntity(e.entityId);
   }
 
   public trackByItem = (_: number, item: SideEffect): number => item.entityId;

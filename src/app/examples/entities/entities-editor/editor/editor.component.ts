@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { AppRouter } from '../../../../app-router';
 import { Entities } from '../../entities-main/entities';
 import { EntitiesStorage } from '../../entities-main/entities-storage';
 import { SideEffect } from '../../models';
@@ -28,7 +28,7 @@ export class EditorComponent {
   public currentEntity: SideEffect | null = null;
   public currentComment = '';
 
-  constructor(private readonly entitiesStorage: EntitiesStorage, private readonly router: Router) {}
+  constructor(private readonly entitiesStorage: EntitiesStorage, private appRouter: AppRouter) {}
 
   public upsert(e: SideEffect | null): void {
     if (!e) {
@@ -39,6 +39,6 @@ export class EditorComponent {
   }
 
   public addNew(): void {
-    void this.router.navigate(['entities']);
+    void this.appRouter.entities();
   }
 }

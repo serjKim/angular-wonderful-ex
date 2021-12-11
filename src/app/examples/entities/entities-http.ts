@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CoreResult, wrapAsync } from '../../core';
+import { CoreResult, wrap, wrapAsync } from '../../core';
+import { Entities } from './entities-main/entities';
 import { EntityId, SideEffect } from './models';
 
 @Injectable({
@@ -26,5 +27,19 @@ export class EntitiesHttp {
     //   startWith(pending()),
     //   catchCoreError(),
     // );
+  }
+
+  public getReason(): Observable<CoreResult<string>> {
+    return this.http.get<string>('https://myend.free.beeceptor.com/').pipe(
+      map(() => `--${new Date().valueOf()}--`),
+      wrap(),
+    );
+  }
+
+  public getAll(): Observable<CoreResult<Entities>> {
+    return this.http.get<string>('https://myend.free.beeceptor.com/').pipe(
+      map(() => new Entities()),
+      wrap(),
+    );
   }
 }

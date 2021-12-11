@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { combineLatest, Observable } from 'rxjs';
 import { map, mergeMap, tap } from 'rxjs/operators';
+import { AppRouter } from '../../../app-router';
 import { CoreResult, isOk } from '../../../core';
 import { EntitiesStorage } from '../entities-main/entities-storage';
 import { SideEffect } from '../models';
@@ -16,7 +17,7 @@ export class EditedEntity extends Observable<CoreResult<SideEffect | null>> {
     map(([ess, entityId]) => (isOk(ess) ? ess.find((s) => s.entityId === entityId) ?? null : ess)),
     tap((x) => {
       if (isOk(x) && !x) {
-        void this.router.navigate(['entities']);
+        void this.appRouter.entities();
       }
     }),
   );
@@ -24,7 +25,7 @@ export class EditedEntity extends Observable<CoreResult<SideEffect | null>> {
   constructor(
     private readonly entitiesStorage: EntitiesStorage,
     private readonly route: ActivatedRoute,
-    private readonly router: Router,
+    private readonly appRouter: AppRouter,
   ) {
     super((subscribe) => this.editedEntity$.subscribe(subscribe));
   }
