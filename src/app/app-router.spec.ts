@@ -47,15 +47,16 @@ describe('AppRouter', () => {
   });
 
   it('should return [entities, id]', async () => {
-    const id = new Date().valueOf().toString();
+    const mockRouter: Pick<Router, 'navigate'> = {
+      navigate: () => Promise.resolve(true),
+    };
     TestBed.overrideProvider(Router, {
-      useValue: {
-        navigate(s: string[]) {
-          expect(s).toEqual([entitiesPath, id]);
-        },
-      },
+      useValue: mockRouter,
     });
+    const navigate = jest.spyOn(mockRouter, 'navigate');
     const appRouter = TestBed.inject(AppRouter);
-    await appRouter.editEntity(EntityId.parse(id));
+    const entityId = new Date().valueOf().toString();
+    await appRouter.editEntity(EntityId.parse(entityId));
+    expect(navigate).toHaveBeenCalledWith([entitiesPath, entityId]);
   });
 });
