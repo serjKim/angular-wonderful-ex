@@ -15,6 +15,6 @@ export class AppRouter {
     return this.router.navigate([entitiesPath]);
   }
   public editEntity(entityId: EntityId): Promise<boolean> {
-    return this.router.navigate([entitiesPath, entityId]);
+    return this.router.navigate([entitiesPath, entityId.toString()]);
   }
 }

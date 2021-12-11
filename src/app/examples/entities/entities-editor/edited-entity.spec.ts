@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
+import { entitiesPath } from '../../../app-routing-data';
 import { isOk } from '../../../core';
 import { Entities } from '../entities-main/entities';
 import { EntitiesStorage } from '../entities-main/entities-storage';
@@ -54,7 +55,7 @@ describe('EditedEntity', () => {
     TestBed.overrideProvider(Router, {
       useValue: {
         navigate(s: string[]) {
-          expect(s).toEqual(['entities']);
+          expect(s).toEqual([entitiesPath]);
           done();
         },
       },
