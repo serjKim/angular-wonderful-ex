@@ -7,11 +7,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core';
 import { ErrorToastModule } from './error-toast';
-import { PlaygroundComponent } from './examples/playground/playground.component';
+import { examplesModules } from './examples';
 import { GlobalErrorHandler } from './global-error.handler';
 
 @NgModule({
-  declarations: [AppComponent, PlaygroundComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     MatDialogModule,
@@ -20,6 +20,7 @@ import { GlobalErrorHandler } from './global-error.handler';
     ErrorToastModule,
     HttpClientModule,
     FormsModule,
+    ...examplesModules,
   ],
   providers: [{ provide: ErrorHandler, useClass: GlobalErrorHandler }],
   bootstrap: [AppComponent],
