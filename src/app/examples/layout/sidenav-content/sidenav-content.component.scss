@@ -1,18 +1,7 @@
-@use 'variables' as *;
-@use 'mixins' as *;
-
 :host {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   justify-content: space-between;
   background-color: #eee; // TODO: temp color
-
-  &.collapsed {
-    width: $sidenav-width-collapsed;
-  }
-
-  transition-duration: $sidenav-transition-duration;
-  transition-timing-function: $sidenav-transition-timing-function;
-  transition-property: width;
 }

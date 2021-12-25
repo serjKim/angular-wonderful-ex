@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'wex-sidenav-content',
@@ -8,7 +8,6 @@ import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, O
 })
 export class SidenavContentComponent {
   @Input()
-  @HostBinding('class.collapsed')
   public collapsed = false;
 
   @Output()
