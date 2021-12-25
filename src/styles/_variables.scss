@@ -1,0 +1,6 @@
+@use '~@angular/material/theming' as mat;
+
+$sidenav-width-expanded: 250px;
+$sidenav-width-collapsed: 75px;
+$sidenav-transition-duration: mat.$swift-ease-out-duration;
+$sidenav-transition-timing-function: mat.$swift-ease-out-timing-function;

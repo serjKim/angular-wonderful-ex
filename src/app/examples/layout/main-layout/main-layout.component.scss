@@ -1,0 +1,27 @@
+@use 'variables' as *;
+@use 'mixins' as m;
+
+.main-layout-container {
+  display: flex;
+  flex-grow: 1;
+
+  .sidenav {
+    display: flex;
+    flex-direction: column;
+    width: $sidenav-width-expanded;
+    overflow-x: hidden;
+
+    &.collapsed {
+      width: $sidenav-width-collapsed;
+    }
+
+    transition-duration: $sidenav-transition-duration;
+    transition-timing-function: $sidenav-transition-timing-function;
+    transition-property: width;
+  }
+
+  .main-content {
+    @include m.flex-column();
+    padding: 0 10px;
+  }
+}

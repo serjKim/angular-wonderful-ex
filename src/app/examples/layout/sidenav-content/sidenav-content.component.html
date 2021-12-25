@@ -1,0 +1,9 @@
+<mat-list role="navigation">
+  <mat-list-item role="link">Item 1</mat-list-item>
+  <mat-list-item role="link">Item 2</mat-list-item>
+  <mat-list-item role="link">Item 3</mat-list-item>
+</mat-list>
+<div class="sidenav-toggle" (click)="onCollapse()">
+  <button mat-button *ngIf="!collapsed">Expand</button>
+  <button mat-button *ngIf="collapsed">Collapse</button>
+</div>

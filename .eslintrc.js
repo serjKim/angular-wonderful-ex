@@ -335,7 +335,7 @@ module.exports = {
         }
       },
       {
-        "files": ["*.component.html"],
+        "files": ["index.html","*.component.html"],
         "parser": "@angular-eslint/template-parser",
         extends: ["plugin:@angular-eslint/template/recommended"],
         "plugins": [

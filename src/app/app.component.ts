@@ -4,8 +4,9 @@ import { Roulette, RouletteStorage } from './examples/roulette-storage.service';
 import { Items, StorageService } from './examples/storage.service';
 
 @Component({
-  selector: 'wex-root',
+  selector: 'wex-app',
   templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {

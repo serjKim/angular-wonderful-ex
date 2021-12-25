@@ -1,0 +1,14 @@
+@use 'variables';
+@use 'mixins' as *;
+@use 'material';
+
+html, body {
+  @include flex-column();
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.flex-router-outlet + * {
+  @include flex-column();
+}

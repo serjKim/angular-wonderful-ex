@@ -1,0 +1,8 @@
+<div class="main-layout-container">
+  <aside class="sidenav" *ngIf="sidenavCollapse.collapsed | async as cr" [class.collapsed]="cr.collapsed">
+    <wex-sidenav-content [collapsed]="cr.collapsed" (collapse)="onCollapse($event)"></wex-sidenav-content>
+  </aside>
+  <main class="main-content">
+    <router-outlet class="flex-router-outlet"></router-outlet>
+  </main>
+</div>
