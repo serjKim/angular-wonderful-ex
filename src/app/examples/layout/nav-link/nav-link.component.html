@@ -6,6 +6,9 @@
   class="nav-link"
   [class.minimal]="minimal"
   [class.child]="child"
+  [matTooltip]="navLink.label"
+  [matTooltipDisabled]="!minimal"
+  [matTooltipPosition]="'right'"
 >
   <span class="nav-link-content">
     <mat-icon class="nav-link-icon" *ngIf="navLink.icon">

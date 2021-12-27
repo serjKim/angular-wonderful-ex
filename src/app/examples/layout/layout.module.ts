@@ -6,11 +6,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
-import { SidenavContentComponent } from './sidenav-content/sidenav-content.component';
 import { NavLinkComponent } from './nav-link';
+import { SidenavContentComponent } from './sidenav-content/sidenav-content.component';
 
 @NgModule({
   declarations: [MainLayoutComponent, SidenavContentComponent, LayoutComponent, NavLinkComponent],
@@ -22,6 +23,7 @@ import { NavLinkComponent } from './nav-link';
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
+    MatTooltipModule,
     LayoutModule,
   ],
   exports: [MainLayoutComponent],
