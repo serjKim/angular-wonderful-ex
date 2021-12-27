@@ -1,5 +1,13 @@
+@use 'variables' as *;
+
 @mixin flex-column() {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
+}
+
+@mixin sidenav-animation($props) {
+  transition-duration: $sidenav-transition-duration;
+  transition-timing-function: $sidenav-transition-timing-function;
+  transition-property: $props;
 }

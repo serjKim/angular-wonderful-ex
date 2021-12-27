@@ -1,0 +1,75 @@
+@use 'variables' as *;
+@use 'mixins' as m;
+
+.nav-link {
+  $nav-link-padding: 26px;
+
+  display: flex;
+  color: $default-foreground-color;
+  padding: 8px $nav-link-padding;
+  text-decoration: none;
+  position: relative;
+  @include m.sidenav-animation(padding-left);
+
+  &:hover {
+    background-color: $default-hover-color;
+  }
+
+  &.active {
+    background-color: darken($default-hover-color, 15%);
+  }
+
+  &.child {
+    padding-left: $nav-link-padding + 10px;
+  }
+
+  .nav-link-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-grow: 1;
+    overflow: hidden;
+    font-size: $default-body-font-size;
+
+    .nav-link-label {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      margin-right: 21px;
+      @include m.sidenav-animation(opacity);
+    }
+  }
+
+  .badge {
+    position: absolute;
+    right: $nav-link-padding;
+    top: 13px;
+    background-color: #a354cb;
+    color: white;
+    font-size: 9px;
+    border-radius: 30px;
+    width: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 15px;
+    @include m.sidenav-animation((top, right));
+  }
+
+  &.minimal {
+    &.child {
+      padding-left: $nav-link-padding;
+    }
+
+    .nav-link-content {
+      .nav-link-label {
+        opacity: 0;
+      }
+    }
+
+    .badge {
+      top: 20px;
+      right: 20px;
+    }
+  }
+}

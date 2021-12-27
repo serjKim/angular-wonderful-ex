@@ -1,0 +1,17 @@
+<a
+  *ngIf="navLink"
+  [routerLink]="navLink.url"
+  routerLinkActive="active"
+  [routerLinkActiveOptions]="{ exact: true }"
+  class="nav-link"
+  [class.minimal]="minimal"
+  [class.child]="child"
+>
+  <span class="nav-link-content">
+    <mat-icon class="nav-link-icon" *ngIf="navLink.icon">
+      {{ navLink.icon }}
+    </mat-icon>
+    <span class="nav-link-label">{{ navLink.label }}</span>
+  </span>
+  <span *ngIf="navLink.badge | async as badge" class="badge">{{ badge }}</span>
+</a>

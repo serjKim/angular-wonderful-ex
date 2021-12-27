@@ -1,10 +1,15 @@
-@use 'variables';
+@use 'variables' as *;
 @use 'mixins' as *;
 @use 'material';
 
-html, body {
+html {
   @include flex-column();
   height: 100%;
+}
+
+body {
+  font-family: $default-font-family;
+  @include flex-column();
   margin: 0;
   padding: 0;
 }

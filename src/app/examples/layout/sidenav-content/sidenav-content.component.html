@@ -1,9 +1,15 @@
-<mat-list role="navigation">
-  <mat-list-item role="link">Item 1</mat-list-item>
-  <mat-list-item role="link">Item 2</mat-list-item>
-  <mat-list-item role="link">Item 3</mat-list-item>
-</mat-list>
-<div class="sidenav-toggle" (click)="onCollapse()">
-  <button mat-button *ngIf="!collapsed">Expand</button>
-  <button mat-button *ngIf="collapsed">Collapse</button>
-</div>
+<nav class="nav-links" role="navigation">
+  <ng-container *ngFor="let parentLink of links">
+    <wex-nav-link [navLink]="parentLink" [minimal]="collapsed"></wex-nav-link>
+    <wex-nav-link
+      *ngFor="let childLink of parentLink.children | async"
+      [navLink]="childLink"
+      [minimal]="collapsed"
+      [child]="true"
+    ></wex-nav-link>
+  </ng-container>
+</nav>
+<button mat-button [disableRipple]="true" class="sidenav-toggle" (click)="onCollapse()">
+  <mat-icon *ngIf="!collapsed">keyboard_arrow_left</mat-icon>
+  <mat-icon *ngIf="collapsed">keyboard_arrow_right</mat-icon>
+</button>
