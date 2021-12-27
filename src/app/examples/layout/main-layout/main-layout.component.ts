@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { of } from 'rxjs';
 import { SidenavCollapseService } from './sidenav-collapse.service';
 
 @Component({
@@ -12,6 +13,6 @@ export class MainLayoutComponent {
   constructor(public readonly sidenavCollapse: SidenavCollapseService) {}
 
   public onCollapse(collapsed: boolean): void {
-    this.sidenavCollapse.setCollapsed(collapsed);
+    this.sidenavCollapse.setCollapsed(of(collapsed));
   }
 }

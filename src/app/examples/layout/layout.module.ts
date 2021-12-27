@@ -27,6 +27,6 @@ import { HeaderComponent } from './header/header.component';
     MatTooltipModule,
     LayoutModule,
   ],
-  exports: [MainLayoutComponent],
+  exports: [MainLayoutComponent, BodyLayoutComponent],
 })
 export class MainLayoutModule {}

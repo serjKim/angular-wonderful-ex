@@ -1,7 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { distinctUntilChanged, map } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
+import { distinctUntilChanged, exhaustMap, map } from 'rxjs/operators';
 
 export interface CollapsedResult {
   readonly collapsed: boolean;
@@ -11,7 +11,7 @@ export interface CollapsedResult {
 export class SidenavCollapseService implements OnDestroy {
   public readonly collapsed: Observable<CollapsedResult>;
 
-  private readonly collapsed$ = new BehaviorSubject(false);
+  private readonly collapsed$ = new BehaviorSubject<Observable<boolean>>(of(false));
   private readonly subscription: Subscription;
 
   constructor(breakpointObserver: BreakpointObserver) {
@@ -22,9 +22,10 @@ export class SidenavCollapseService implements OnDestroy {
         if (!matches && this.collapsed$.value) {
           return;
         }
-        this.collapsed$.next(matches);
+        this.collapsed$.next(of(matches));
       });
     this.collapsed = this.collapsed$.pipe(
+      exhaustMap((x) => x),
       distinctUntilChanged(),
       map((collapsed) => ({ collapsed })),
     );
@@ -34,7 +35,7 @@ export class SidenavCollapseService implements OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  public setCollapsed(collapsed: boolean): void {
+  public setCollapsed(collapsed: Observable<boolean>): void {
     this.collapsed$.next(collapsed);
   }
 }
