@@ -1,6 +1,6 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Injectable } from '@angular/core';
-import { merge, Observable, ReplaySubject } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 
 export interface CollapsedResult {
@@ -8,18 +8,30 @@ export interface CollapsedResult {
 }
 
 @Injectable()
-export class SidenavCollapseService {
+export class SidenavCollapseService implements OnDestroy {
   public readonly collapsed: Observable<CollapsedResult>;
-  private readonly collapsed$ = new ReplaySubject<boolean>(1);
+
+  private readonly collapsed$ = new BehaviorSubject(false);
+  private readonly subscription: Subscription;
 
   constructor(breakpointObserver: BreakpointObserver) {
-    const matched$ = breakpointObserver
+    this.subscription = breakpointObserver
       .observe([Breakpoints.XSmall, Breakpoints.Small])
-      .pipe(map((result) => result.breakpoints[Breakpoints.XSmall] || result.breakpoints[Breakpoints.Small]));
-    this.collapsed = merge(matched$, this.collapsed$).pipe(
+      .pipe(map((result) => result.matches))
+      .subscribe((matches) => {
+        if (!matches && this.collapsed$.value) {
+          return;
+        }
+        this.collapsed$.next(matches);
+      });
+    this.collapsed = this.collapsed$.pipe(
       distinctUntilChanged(),
       map((collapsed) => ({ collapsed })),
     );
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   public setCollapsed(collapsed: boolean): void {
