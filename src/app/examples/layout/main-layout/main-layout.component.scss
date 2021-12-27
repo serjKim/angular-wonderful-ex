@@ -4,24 +4,38 @@
 .main-layout-container {
   display: flex;
   flex-grow: 1;
+  position: relative;
 
   .sidenav {
     display: flex;
     flex-direction: column;
     width: $sidenav-width-expanded;
     overflow-x: hidden;
+    overflow-y: overlay;
+    position: fixed;
+    top: $header-height;
+    bottom: 0;
 
     &.collapsed {
       width: $sidenav-width-collapsed;
     }
 
-    transition-duration: $sidenav-transition-duration;
-    transition-timing-function: $sidenav-transition-timing-function;
-    transition-property: width;
+    @include m.sidenav-animation(width);
   }
 
   .main-content {
     @include m.flex-column();
     padding: 8px 0 0 8px;
+    margin-top: $header-height;
+
+    @include m.sidenav-animation(margin-left);
+
+    &.expanded {
+      margin-left: $sidenav-width-expanded;
+    }
+
+    &.collapsed {
+      margin-left: $sidenav-width-collapsed;
+    }
   }
 }

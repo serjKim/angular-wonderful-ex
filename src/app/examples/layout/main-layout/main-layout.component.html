@@ -2,7 +2,7 @@
   <aside class="sidenav" *ngIf="sidenavCollapse.collapsed | async as cr" [class.collapsed]="cr.collapsed">
     <wex-sidenav [collapsed]="cr.collapsed" (collapse)="onCollapse($event)"></wex-sidenav>
   </aside>
-  <main class="main-content">
+  <main class="main-content" [ngClass]="(mainCollapseCssClass$ | async) ?? ''">
     <router-outlet class="flex-router-outlet"></router-outlet>
   </main>
 </div>

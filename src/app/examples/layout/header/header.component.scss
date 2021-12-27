@@ -1,7 +1,12 @@
 @use 'variables' as *;
 
+:host {
+  z-index: 1;
+}
+
 .toolbar {
   height: $header-height;
+  position: fixed;
 }
 
 .example-spacer {
