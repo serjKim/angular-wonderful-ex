@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '@angular/material/theming' as theming;
+@use '@angular/material/core/style/variables' as v;
 @use '@angular/material' as mat;
 
 // Font-family
@@ -41,7 +41,7 @@ $badge-green-color: map.get(mat.$green-palette, 300);
 $sidenav-background-color: mat.get-color-from-palette($_background-palette, app-bar);
 $sidenav-width-expanded: 250px;
 $sidenav-width-collapsed: 75px;
-$sidenav-transition-duration: theming.$swift-ease-out-duration;
-$sidenav-transition-timing-function: theming.$swift-ease-out-timing-function;
+$sidenav-transition-duration: v.$swift-ease-out-duration;
+$sidenav-transition-timing-function: v.$swift-ease-out-timing-function;
 
 $header-height: 64px;
