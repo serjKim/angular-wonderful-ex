@@ -33,6 +33,11 @@ $default-body-font-size: map.get($_body_1, font-size);
 $default-foreground-color: mat.get-color-from-palette($_foreground-palette, base);
 $default-hover-color: mat.get-color-from-palette($_background-palette, hover);
 
+$badge-red-color: map.get(mat.$red-palette, A700);
+$badge-purple-color: map.get(mat.$purple-palette, A700);
+$badge-amber-color: map.get(mat.$amber-palette, A700);
+$badge-green-color: map.get(mat.$green-palette, A700);
+
 $sidenav-background-color: mat.get-color-from-palette($_background-palette, app-bar);
 $sidenav-width-expanded: 250px;
 $sidenav-width-collapsed: 75px;

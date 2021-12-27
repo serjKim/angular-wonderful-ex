@@ -44,7 +44,7 @@
     position: absolute;
     right: $nav-link-padding;
     top: 13px;
-    background-color: #a354cb;
+    background-color: $badge-purple-color;
     color: white;
     font-size: 9px;
     border-radius: 30px;
@@ -54,6 +54,18 @@
     justify-content: center;
     height: 15px;
     @include m.sidenav-animation((top, right));
+
+    &.red {
+      background-color: $badge-red-color;
+    }
+
+    &.amber {
+      background-color: $badge-amber-color;
+    }
+
+    &.green {
+      background-color: $badge-green-color;
+    }
   }
 
   &.minimal {

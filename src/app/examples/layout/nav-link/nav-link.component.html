@@ -13,5 +13,5 @@
     </mat-icon>
     <span class="nav-link-label">{{ navLink.label }}</span>
   </span>
-  <span *ngIf="navLink.badge | async as badge" class="badge">{{ badge }}</span>
+  <span *ngIf="navLink.badge | async as badge" class="badge" [ngClass]="navLink.cssClass">{{ badge }}</span>
 </a>
