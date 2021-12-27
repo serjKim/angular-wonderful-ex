@@ -12,9 +12,10 @@ import { LayoutComponent } from './layout/layout.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { NavLinkComponent } from './nav-link';
 import { SidenavContentComponent } from './sidenav-content/sidenav-content.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
-  declarations: [MainLayoutComponent, SidenavContentComponent, LayoutComponent, NavLinkComponent],
+  declarations: [MainLayoutComponent, SidenavContentComponent, LayoutComponent, NavLinkComponent, HeaderComponent],
   imports: [
     CommonModule,
     RouterModule,

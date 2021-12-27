@@ -1,0 +1,9 @@
+@use 'variables' as *;
+
+.toolbar {
+  height: $header-height;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
