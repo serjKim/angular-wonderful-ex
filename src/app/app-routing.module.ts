@@ -1,12 +1,12 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { entitiesPath, githubPath } from './app-routing-data';
-import { LayoutComponent, MainLayoutComponent } from './examples/layout';
+import { BodyLayoutComponent, MainLayoutComponent } from './examples/layout';
 
 const routes: Routes = [
   {
     path: '',
-    component: LayoutComponent,
+    component: BodyLayoutComponent,
     children: [
       {
         path: '',

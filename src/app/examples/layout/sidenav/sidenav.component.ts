@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { interval, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { NavLink } from '../nav-link';
+import { NavLink } from '../sidenav-link';
 
 @Component({
-  selector: 'wex-sidenav-content',
-  templateUrl: './sidenav-content.component.html',
-  styleUrls: ['./sidenav-content.component.scss'],
+  selector: 'wex-sidenav',
+  templateUrl: './sidenav.component.html',
+  styleUrls: ['./sidenav.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SidenavContentComponent {
+export class SidenavComponent {
   @Input()
   public collapsed = false;
 

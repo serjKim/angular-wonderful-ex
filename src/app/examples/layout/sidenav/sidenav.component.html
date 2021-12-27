@@ -1,12 +1,12 @@
 <nav class="nav-links" role="navigation">
   <ng-container *ngFor="let parentLink of links">
-    <wex-nav-link [navLink]="parentLink" [minimal]="collapsed"></wex-nav-link>
-    <wex-nav-link
+    <wex-sidenav-link [navLink]="parentLink" [minimal]="collapsed"></wex-sidenav-link>
+    <wex-sidenav-link
       *ngFor="let childLink of parentLink.children | async"
       [navLink]="childLink"
       [minimal]="collapsed"
       [child]="true"
-    ></wex-nav-link>
+    ></wex-sidenav-link>
   </ng-container>
 </nav>
 <button mat-button [disableRipple]="true" class="sidenav-toggle" (click)="onCollapse()">

@@ -8,14 +8,14 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
-import { LayoutComponent } from './layout/layout.component';
+import { BodyLayoutComponent } from './body-layout/body-layout.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
-import { NavLinkComponent } from './nav-link';
-import { SidenavContentComponent } from './sidenav-content/sidenav-content.component';
+import { SideNavLinkComponent } from './sidenav-link';
+import { SidenavComponent } from './sidenav/sidenav.component';
 import { HeaderComponent } from './header/header.component';
 
 @NgModule({
-  declarations: [MainLayoutComponent, SidenavContentComponent, LayoutComponent, NavLinkComponent, HeaderComponent],
+  declarations: [MainLayoutComponent, SidenavComponent, BodyLayoutComponent, SideNavLinkComponent, HeaderComponent],
   imports: [
     CommonModule,
     RouterModule,
