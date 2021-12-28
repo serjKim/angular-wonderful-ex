@@ -32,7 +32,7 @@ export class EditorComponent {
 
   public upsert(e: SideEffect | null): void {
     if (!e) {
-      this.entitiesStorage.create(this.currentComment, this.confirmationControl.value);
+      this.entitiesStorage.create(this.currentComment, this.confirmationControl.value as boolean);
     } else {
       this.entities?.update(e.entityId, this.currentComment);
     }

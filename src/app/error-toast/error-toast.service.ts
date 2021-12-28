@@ -34,7 +34,7 @@ class ErrorToastService {
     );
   }
 
-  private handleCoreError(err: CoreError) {
+  private handleCoreError(err: CoreError): void {
     if (err instanceof HttpErrorResponse) {
       this.snackBar.open(`${err.status}: ${err.message}`, 'Close');
     } else {

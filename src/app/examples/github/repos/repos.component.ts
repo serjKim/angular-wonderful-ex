@@ -1,5 +1,6 @@
-import { FormControl } from '@angular/forms';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { Repos } from '../github.service';
 import { ReposService } from './repos.service';
 
@@ -15,6 +16,6 @@ export class ReposComponent {
   public allowEditor = true;
 
   constructor(reposService: ReposService) {
-    this.repos$ = reposService.loadRepos(this.searchControl.valueChanges);
+    this.repos$ = reposService.loadRepos(this.searchControl.valueChanges as Observable<string>);
   }
 }
