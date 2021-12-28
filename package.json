@@ -49,7 +49,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-standard-with-typescript": "^21.0.1",
     "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-jsdoc": "^37.4.1",
+    "eslint-plugin-jsdoc": "^37.4.2",
     "husky": "^6.0.0",
     "jest": "^27.3.1",
     "jest-preset-angular": "^11.0.1",
