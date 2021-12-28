@@ -152,7 +152,7 @@ or with template:
 ```
 The whole content will be replaced with `#pending` template.
 ## CoreResultError
-The Rxjs streams are stopped once an error has occurred in. You have to handle it by the `catchError` operator.
+The Rxjs streams are stopped once an error has occurred in. You might want to handle it by the `catchError` operator.
 
 Example:
 A http call might be completed with an error. To handle, add `catchCoreError` to the pipe before `startWith`.
@@ -191,9 +191,14 @@ or with templates:
 <ng-template #pending> Loading... </ng-template>
 <ng-template #error> Error occurred. </ng-template>
 ```
+
+## CoreResultError vs GlobalErrorHandler
+> If you need for retirable operation and application to be resilient after an error occurred, use `catchCoreError`
+>
+> Otherwise, the error will be caught by the global error handler and some functionality might stop working.
+
 ## Use `wrap`
-The `wrap` is already encapsulating the ones technics:
-Just add one to any http request:
+The `wrap` is already encapsulating those ones technics:
 ```typescript
 return this.httpClient.http
   .get<T>(...) // Observable<T>
