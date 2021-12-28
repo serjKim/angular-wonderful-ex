@@ -195,10 +195,10 @@ or with templates:
 ## CoreResultError vs GlobalErrorHandler
 > If you need to retry operation and application to be resilient after an error occurred, use `catchCoreError`
 >
-> Otherwise, the error will be caught by the global error handler and some functionality might stop working.
+> Otherwise, the error will be caught by the global error handler and some functionality might stop working and restored only after refreshing the page.
 
 ## Use `wrap`
-The `wrap` is already encapsulating those ones technics:
+The `wrap` is already encapsulating those technics:
 ```typescript
 return this.httpClient.http
   .get<T>(...) // Observable<T>
@@ -220,7 +220,7 @@ type CoreResultError =
 ```
 
 ## Use ```wrapAsync``` with promise
-The non-cancelable version of wrap. It could be useful for side effects, like a entity creating.
+The **non-cancelable** version of wrap. It could be useful for side effects, like a entity creating.
 ```typescript
 wrapAsync(() => this.http.post<T>(...).toPromise()) // Observable<T | CoreResultError | Pending>
 ```
