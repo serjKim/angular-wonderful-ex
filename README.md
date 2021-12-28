@@ -193,7 +193,7 @@ or with templates:
 ```
 
 ## CoreResultError vs GlobalErrorHandler
-> If you need for retirable operation and application to be resilient after an error occurred, use `catchCoreError`
+> If you need to retry operation and application to be resilient after an error occurred, use `catchCoreError`
 >
 > Otherwise, the error will be caught by the global error handler and some functionality might stop working.
 
