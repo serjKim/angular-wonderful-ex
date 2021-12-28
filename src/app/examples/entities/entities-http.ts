@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CoreResult, wrap, wrapAsync } from '../../core';
 import { Entities } from './entities-main/entities';
@@ -14,10 +14,11 @@ export class EntitiesHttp {
 
   public post(comment: string, onCreated: (se: SideEffect) => void): Observable<CoreResult<SideEffect>> {
     return wrapAsync(async () => {
-      const se = await this.http
-        .post('https://myend.free.beeceptor.com/', {})
-        .pipe(map(() => ({ entityId: EntityId.parse(new Date().valueOf()), comment })))
-        .toPromise();
+      const se = await firstValueFrom(
+        this.http
+          .post('https://myend.free.beeceptor.com/', {})
+          .pipe(map(() => ({ entityId: EntityId.parse(new Date().valueOf()), comment }))),
+      );
       onCreated(se);
       return se;
     });

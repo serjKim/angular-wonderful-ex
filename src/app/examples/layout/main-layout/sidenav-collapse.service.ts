@@ -1,7 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
-import { distinctUntilChanged, exhaustMap, map, publishReplay, refCount } from 'rxjs/operators';
+import { distinctUntilChanged, exhaustMap, map, shareReplay } from 'rxjs/operators';
 
 export interface CollapsedResult {
   readonly collapsed: boolean;
@@ -28,8 +28,7 @@ export class SidenavCollapseService implements OnDestroy {
       exhaustMap((x) => x),
       distinctUntilChanged(),
       map((collapsed) => ({ collapsed })),
-      publishReplay(1),
-      refCount(),
+      shareReplay({ bufferSize: 1, refCount: true }),
     );
   }
 
