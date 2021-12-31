@@ -1,4 +1,4 @@
-import { MainLayoutModule } from './layout';
+import { LayoutModule } from './layout';
 import { PlaygroundModule } from './playground/playground.module';
 
-export const examplesModules = [PlaygroundModule, MainLayoutModule];
+export const examplesModules = [PlaygroundModule, LayoutModule];

@@ -1,4 +1,4 @@
-import { LayoutModule } from '@angular/cdk/layout';
+import { LayoutModule as MdlLayoutModule } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,8 +25,8 @@ import { HeaderComponent } from './header/header.component';
     MatToolbarModule,
     MatIconModule,
     MatTooltipModule,
-    LayoutModule,
+    MdlLayoutModule,
   ],
   exports: [MainLayoutComponent, BodyLayoutComponent],
 })
-export class MainLayoutModule {}
+export class LayoutModule {}
