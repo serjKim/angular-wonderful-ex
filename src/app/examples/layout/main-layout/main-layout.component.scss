@@ -1,7 +1,7 @@
 @use 'variables' as *;
 @use 'mixins' as m;
 
-.main-layout-container {
+:host {
   display: flex;
   flex-grow: 1;
   position: relative;
