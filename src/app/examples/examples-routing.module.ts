@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { entitiesPath, githubPath } from '../app-routing-data';
+import { entitiesPath, githubPath, playgroundPath } from '../app-routing-data';
 import { ExamplesLayoutComponent } from './examples-layout/examples-layout.component';
+import { PlaygroundComponent } from './playground/playground.component';
 
 const routes: Routes = [
   {
@@ -9,13 +10,20 @@ const routes: Routes = [
     component: ExamplesLayoutComponent,
     children: [
       {
+        path: playgroundPath,
+        component: PlaygroundComponent,
+      },
+      {
         path: githubPath,
         loadChildren: () => import('./github').then((m) => m.GithubModule),
-        pathMatch: 'full',
       },
       {
         path: entitiesPath,
         loadChildren: () => import('./entities').then((m) => m.EntitiesModule),
+      },
+      {
+        path: '**',
+        redirectTo: `/${playgroundPath}`,
       },
     ],
   },

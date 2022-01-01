@@ -1,4 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Roulette, RouletteStorage } from '../roulette-storage.service';
+import { Items, StorageService } from '../storage.service';
 
 @Component({
   selector: 'wex-playground',
@@ -6,29 +9,24 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
   styleUrls: ['./playground.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PlaygroundComponent implements OnInit {
-  @Input()
-  public massValue = 0;
+export class PlaygroundComponent {
+  public readonly title = 'wonderful-ex';
+  public readonly items$: Observable<Items>;
+  public readonly roulette$: Observable<Roulette>;
+  public allowLoad = true;
+  public allowRoulette = false;
 
-  @Input()
-  public a = 0;
+  constructor(private readonly storageService: StorageService, rouletteStorage: RouletteStorage) {
+    this.items$ = storageService.getItems();
+    this.roulette$ = rouletteStorage.load();
+  }
 
-  @Input()
-  public b = 1;
+  public onLoad(): void {
+    this.storageService.load();
+  }
 
-  @Input()
-  public c = 2;
-
-  @Input()
-  public d = 2;
-
-  @Input()
-  public e = 2;
-
-  @Input()
-  public f = 2;
-
-  constructor() {}
-
-  public ngOnInit(): void {}
+  public raiseError(): void {
+    // eslint-disable-next-line no-throw-literal
+    throw 111;
+  }
 }
