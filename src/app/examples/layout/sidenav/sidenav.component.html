@@ -1,5 +1,5 @@
 <nav class="nav-links" role="navigation">
-  <ng-container *ngFor="let parentLink of links">
+  <ng-container *ngFor="let parentLink of links$ | async">
     <wex-sidenav-link [navLink]="parentLink" [minimal]="collapsed"></wex-sidenav-link>
     <wex-sidenav-link
       *ngFor="let childLink of parentLink.children | async"
