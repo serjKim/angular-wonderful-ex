@@ -1,0 +1,8 @@
+<div>
+  <ng-container *wexUnwrap="confirmResult$ | async as confirmResult; state as s">
+    <button mat-flat-button color="primary" [disabled]="s.pending" (click)="confirm()">Confirm</button>
+    <p>
+      Result: <span>{{ confirmResult }}</span>
+    </p>
+  </ng-container>
+</div>

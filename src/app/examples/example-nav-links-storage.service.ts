@@ -20,6 +20,7 @@ export class ExampleNavLinksStorageService extends SideNavLinksStorage {
       ]),
     ),
     new NavLink(['github'], 'Github', 'settings', of('8'), 'red'),
+    new NavLink(['simple-confirmation'], 'Simple Confirmation Dialog', 'contact_support', of('')),
     new NavLink(['a', 'b', 'c'], 'A link', 'calendar_today', of('99'), 'amber'),
     new NavLink(['a', 'b', 'c'], 'Wrong link', 'favorite', of(null)),
     new NavLink(['a', 'b', 'c'], 'A link with a very long long text', 'home'),
