@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { exhaustAll, Observable, Subject } from 'rxjs';
+import { exhaustAll, Observable, startWith, Subject } from 'rxjs';
+import { Pending, pending } from '../../../core';
 
 @Component({
   selector: 'wex-simple-confirmation-dialog',
@@ -24,15 +25,15 @@ export class SimpleConfirmationDialog {}
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SimpleConfirmationComponent {
-  public readonly confirmResult$: Observable<boolean>;
-  private readonly confirmDialog$ = new Subject<Observable<boolean>>();
+  public readonly confirmResult$: Observable<boolean | Pending>;
+  private readonly confirmDialog$ = new Subject<Observable<boolean | Pending>>();
 
   constructor(public readonly dialog: MatDialog) {
     this.confirmResult$ = this.confirmDialog$.pipe(exhaustAll());
   }
 
   public confirm(): void {
-    this.confirmDialog$.next(this.openConfirmDialog());
+    this.confirmDialog$.next(this.openConfirmDialog().pipe(startWith(pending())));
   }
 
   private openConfirmDialog(): Observable<boolean> {
