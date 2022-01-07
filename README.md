@@ -56,23 +56,17 @@ const UserId = {
   },
 } as const;
 ```
-Better is to put the `parse` to a const object named as well as `UserId`, hence there would be only single import in the consumer's code:
+3. Use in the consumer's code
 ```typescript
 import { UserId } from './user-id'
 
 const userId = UserId.parse(1);
 
 function foo(userId: UserId) {}
-```
-instead of
-```typescript
-import { UserId, parseUserId } from './user-id'
 
-const userId = parseUserId(1);
-
-function foo(userId: UserId) {}
+foo(userId);
 ```
-### **Properties**
+### **Benefits**
 1. Allows to cast to the underlying type.
 ```typescript
 const n: number = userId; // Ok      it refers to a number (kind of Covariance),
