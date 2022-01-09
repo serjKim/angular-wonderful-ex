@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ExampleNavLinksStorageService } from '../example-nav-links-storage.service';
-import { SideNavLinksStorage } from '../layout';
+import { SideNavLinksStorage } from '../../layout';
 
 @Component({
   selector: 'wex-examples-layout',
