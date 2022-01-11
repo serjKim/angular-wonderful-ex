@@ -1,2 +1,2 @@
-export * from './side-effect';
+export * from './entity';
 export * from './entity-id';

@@ -5,15 +5,15 @@ import { exhaustMap, map, mergeMap } from 'rxjs/operators';
 import { CoreResult, isOk } from '../../../core';
 import { CreateConfirmation } from '../entities-editor/create-confirmation';
 import { EntitiesHttp } from '../entities-http';
-import { SideEffect } from '../models';
+import { Entity } from '../models';
 import { Entities } from './entities';
 
 @Injectable()
 export class EntitiesStorage {
-  public readonly createdEntity: Observable<CoreResult<SideEffect | null>>;
+  public readonly createdEntity: Observable<CoreResult<Entity | null>>;
   public readonly entities: Observable<Entities>;
 
-  private readonly sideEffect$ = new Subject<Observable<CoreResult<SideEffect | null>>>();
+  private readonly sideEffect$ = new Subject<Observable<CoreResult<Entity | null>>>();
   private readonly entities$ = new BehaviorSubject(new Entities());
 
   constructor(
@@ -47,9 +47,9 @@ export class EntitiesStorage {
     this.entities$.next(new Entities());
   }
 
-  private addEntity = (se: CoreResult<SideEffect>): void => {
-    if (isOk(se)) {
-      this.entities$.value.add(se);
+  private addEntity = (e: CoreResult<Entity>): void => {
+    if (isOk(e)) {
+      this.entities$.value.add(e);
     }
   };
 }

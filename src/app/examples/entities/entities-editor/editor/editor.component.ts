@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { AppRouter } from '../../../../app-router';
 import { Entities } from '../../entities-main/entities';
 import { EntitiesStorage } from '../../entities-main/entities-storage';
-import { SideEffect } from '../../models';
+import { Entity } from '../../models';
 
 @Component({
   selector: 'wex-editor',
@@ -13,7 +13,7 @@ import { SideEffect } from '../../models';
 })
 export class EditorComponent {
   @Input()
-  public set entity(val: SideEffect | null) {
+  public set entity(val: Entity | null) {
     this.currentEntity = val;
     if (this.currentEntity) {
       this.currentComment = this.currentEntity.comment;
@@ -25,12 +25,12 @@ export class EditorComponent {
 
   public readonly createdEntity$ = this.entitiesStorage.createdEntity;
   public readonly confirmationControl = new FormControl(true);
-  public currentEntity: SideEffect | null = null;
+  public currentEntity: Entity | null = null;
   public currentComment = '';
 
   constructor(private readonly entitiesStorage: EntitiesStorage, private appRouter: AppRouter) {}
 
-  public upsert(e: SideEffect | null): void {
+  public upsert(e: Entity | null): void {
     if (!e) {
       this.entitiesStorage.create(this.currentComment, this.confirmationControl.value as boolean);
     } else {

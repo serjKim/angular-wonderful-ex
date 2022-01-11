@@ -5,11 +5,11 @@ import { map, mergeMap, tap } from 'rxjs/operators';
 import { AppRouter } from '../../../app-router';
 import { CoreResult, isOk } from '../../../core';
 import { EntitiesStorage } from '../entities-main/entities-storage';
-import { SideEffect } from '../models';
+import { Entity } from '../models';
 import { mapEntityId } from '../routing-data';
 
 @Injectable()
-export class EditedEntity extends Observable<CoreResult<SideEffect | null>> {
+export class EditedEntity extends Observable<CoreResult<Entity | null>> {
   private readonly editedEntity$ = combineLatest([
     this.entitiesStorage.entities.pipe(mergeMap((x) => x.entities)),
     this.route.params.pipe(mapEntityId()),

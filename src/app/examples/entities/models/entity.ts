@@ -1,6 +1,6 @@
 import { EntityId } from './entity-id';
 
-export interface SideEffect {
+export interface Entity {
   readonly entityId: EntityId;
   readonly comment: string;
 }

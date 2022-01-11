@@ -1,11 +1,11 @@
 import { BehaviorSubject, Observable } from 'rxjs';
 import { delay, startWith, tap } from 'rxjs/operators';
 import { pending, Pending } from '../../../core';
-import { EntityId, SideEffect } from '../models';
+import { Entity, EntityId } from '../models';
 
 export class Entities {
-  public readonly entities: Observable<SideEffect[] | Pending>;
-  private readonly entities$ = new BehaviorSubject<SideEffect[]>([
+  public readonly entities: Observable<Entity[] | Pending>;
+  private readonly entities$ = new BehaviorSubject<Entity[]>([
     {
       entityId: EntityId.parse(1636834527025),
       comment: '1636834527025',
@@ -36,12 +36,12 @@ export class Entities {
     );
   }
 
-  public add(se: SideEffect): void {
-    this.entities$.next([...this.entities$.value, se]);
+  public add(e: Entity): void {
+    this.entities$.next([...this.entities$.value, e]);
   }
 
-  public remove(se: SideEffect): void {
-    this.entities$.next([...this.entities$.value].filter((x) => x.entityId !== se.entityId));
+  public remove(e: Entity): void {
+    this.entities$.next([...this.entities$.value].filter((x) => x.entityId !== e.entityId));
   }
 
   public update(seId: EntityId, comment: string): void {

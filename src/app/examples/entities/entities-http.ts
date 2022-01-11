@@ -4,7 +4,7 @@ import { firstValueFrom, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CoreResult, wrap, wrapAsync } from '../../core';
 import { Entities } from './entities-main/entities';
-import { EntityId, SideEffect } from './models';
+import { Entity, EntityId } from './models';
 
 @Injectable({
   providedIn: 'root',
@@ -12,15 +12,15 @@ import { EntityId, SideEffect } from './models';
 export class EntitiesHttp {
   constructor(private readonly http: HttpClient) {}
 
-  public post(comment: string, onCreated: (se: SideEffect) => void): Observable<CoreResult<SideEffect>> {
+  public post(comment: string, onCreated: (e: Entity) => void): Observable<CoreResult<Entity>> {
     return wrapAsync(async () => {
-      const se = await firstValueFrom(
+      const e = await firstValueFrom(
         this.http
           .post('https://myend.free.beeceptor.com/', {})
           .pipe(map(() => ({ entityId: EntityId.parse(new Date().valueOf()), comment }))),
       );
-      onCreated(se);
-      return se;
+      onCreated(e);
+      return e;
     });
     // return of(new Date().valueOf()).pipe(
     //   delay(400),

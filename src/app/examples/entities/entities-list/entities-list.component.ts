@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { AppRouter } from 'src/app/app-router';
 import { Entities } from '../entities-main/entities';
 import { EntitiesStorage } from '../entities-main/entities-storage';
-import { SideEffect } from '../models';
+import { Entity } from '../models';
 
 @Component({
   selector: 'wex-entities-list',
@@ -18,13 +18,13 @@ export class EntitiesListComponent {
     this.entitiesCollection$ = entitiesStorage.entities;
   }
 
-  public deleteItem(entities: Entities, e: SideEffect): void {
+  public deleteItem(entities: Entities, e: Entity): void {
     entities.remove(e);
   }
 
-  public editItem(e: SideEffect): void {
+  public editItem(e: Entity): void {
     void this.appRouter.editEntity(e.entityId);
   }
 
-  public trackByItem = (_: number, item: SideEffect): number => item.entityId;
+  public trackByItem = (_: number, item: Entity): number => item.entityId;
 }
