@@ -17,7 +17,7 @@ export class EditedEntity extends Observable<CoreResult<Entity | null>> {
     map(([ess, entityId]) => (isOk(ess) ? ess.find((s) => s.entityId === entityId) ?? null : ess)),
     tap((x) => {
       if (isOk(x) && !x) {
-        this.eventEmitter.emitter.emit(EditedEntityEvent.None);
+        this.eventEmitter.emit(EditedEntityEvent.None);
       }
     }),
   );

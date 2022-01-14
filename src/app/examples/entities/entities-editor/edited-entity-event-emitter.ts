@@ -5,6 +5,4 @@ export const enum EditedEntityEvent {
 }
 
 @Injectable()
-export class EditedEntityEventEmitter {
-  public readonly emitter = new EventEmitter<EditedEntityEvent>();
-}
+export class EditedEntityEventEmitter extends EventEmitter<EditedEntityEvent> {}

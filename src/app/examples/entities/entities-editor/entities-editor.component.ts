@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Host } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Host, Self } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Entities } from '../entities-main/entities';
 import { EntitiesStorage } from '../entities-main/entities-storage';
@@ -16,7 +16,12 @@ import { EditedEntityEventHandler } from './edited-entity-event-handler';
 export class EntitiesEditorComponent {
   public readonly entities$: Observable<Entities>;
 
-  constructor(entitiesStorage: EntitiesStorage, @Host() public readonly editedEntity$: EditedEntity) {
+  constructor(
+    entitiesStorage: EntitiesStorage,
+    @Host() public readonly editedEntity$: EditedEntity,
+    @Self() eventHandler: EditedEntityEventHandler,
+  ) {
+    eventHandler.init();
     this.entities$ = entitiesStorage.entities;
   }
 }

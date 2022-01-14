@@ -5,13 +5,16 @@ import { EditedEntityEvent, EditedEntityEventEmitter } from './edited-entity-eve
 
 @Injectable()
 export class EditedEntityEventHandler implements OnDestroy {
-  private readonly sub: Subscription;
-  constructor(@Self() eventEmitter: EditedEntityEventEmitter, appRouter: AppRouter) {
-    this.sub = eventEmitter.emitter.subscribe((e) => {
-      if (e === EditedEntityEvent.None) {
-        void appRouter.entities();
-      }
-    });
+  private readonly sub = new Subscription();
+  constructor(@Self() private readonly eventEmitter: EditedEntityEventEmitter, private readonly appRouter: AppRouter) {}
+  public init(): void {
+    this.sub.add(
+      this.eventEmitter.subscribe((e) => {
+        if (e === EditedEntityEvent.None) {
+          void this.appRouter.entities();
+        }
+      }),
+    );
   }
   public ngOnDestroy(): void {
     this.sub.unsubscribe();
