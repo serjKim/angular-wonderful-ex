@@ -71,11 +71,9 @@ describe('EditedEntity', () => {
     });
     TestBed.overrideProvider(EditedEntityEventEmitter, {
       useValue: {
-        emitter: {
-          emit(e: EditedEntityEvent) {
-            expect(e).toEqual(EditedEntityEvent.None);
-            done();
-          },
+        emit(e: EditedEntityEvent) {
+          expect(e).toEqual(EditedEntityEvent.None);
+          done();
         },
       },
     });
