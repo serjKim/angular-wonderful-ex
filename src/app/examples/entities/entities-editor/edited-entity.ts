@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Self } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, Observable } from 'rxjs';
 import { map, mergeMap, tap } from 'rxjs/operators';
-import { AppRouter } from '../../../app-router';
 import { CoreResult, isOk } from '../../../core';
 import { EntitiesStorage } from '../entities-main/entities-storage';
 import { Entity } from '../models';
 import { mapEntityId } from '../routing-data';
+import { EditedEntityEvent, EditedEntityEventEmitter } from './edited-entity-event-emitter';
 
 @Injectable()
 export class EditedEntity extends Observable<CoreResult<Entity | null>> {
@@ -17,7 +17,7 @@ export class EditedEntity extends Observable<CoreResult<Entity | null>> {
     map(([ess, entityId]) => (isOk(ess) ? ess.find((s) => s.entityId === entityId) ?? null : ess)),
     tap((x) => {
       if (isOk(x) && !x) {
-        void this.appRouter.entities();
+        this.eventEmitter.emitter.emit(EditedEntityEvent.None);
       }
     }),
   );
@@ -25,7 +25,7 @@ export class EditedEntity extends Observable<CoreResult<Entity | null>> {
   constructor(
     private readonly entitiesStorage: EntitiesStorage,
     private readonly route: ActivatedRoute,
-    private readonly appRouter: AppRouter,
+    @Self() private readonly eventEmitter: EditedEntityEventEmitter,
   ) {
     super((subscribe) => this.editedEntity$.subscribe(subscribe));
   }
