@@ -17,6 +17,7 @@ export class ExampleNavLinksStorageService extends SideNavLinksStorage {
         new NavLink(['entities', 1636834529017], 'Another one', 'description'),
         new NavLink(['entities', 1636834530105], 'Another two', 'description'),
         new NavLink(['entities', 1636834531145], 'Link three', 'description'),
+        new NavLink(['entities', 1636], 'Invalid link', 'description'),
       ]),
     ),
     new NavLink(['github'], 'Github', 'settings', of('8'), 'red'),
