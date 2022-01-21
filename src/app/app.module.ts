@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core';
 import { ErrorToastModule } from './error-toast';
-import { GlobalErrorHandler } from './global-error.handler';
+import { GlobalErrorHandler } from './global-error-handler';
 
 @NgModule({
   declarations: [AppComponent],
