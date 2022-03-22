@@ -22,7 +22,7 @@ export class GlobalErrorHandler extends ErrorHandler {
     super();
   }
 
-  public handleError(error: unknown): void {
+  public override handleError(error: unknown): void {
     const err = this.extractError(error);
     if (err instanceof HttpErrorResponse) {
       switch (err.status) {
