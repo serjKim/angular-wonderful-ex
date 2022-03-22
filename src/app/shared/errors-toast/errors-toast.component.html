@@ -1,0 +1,8 @@
+<div class="errors-container" [class.single-error]="data.errors.length === 1">
+  <div *ngFor="let error of data.errors">
+    {{ error }}
+  </div>
+  <div class="actions">
+    <button mat-flat-button color="warn" (click)="close()">{{ data.actionTitle ?? 'Close' }}</button>
+  </div>
+</div>

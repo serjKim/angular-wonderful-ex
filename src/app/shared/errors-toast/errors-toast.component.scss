@@ -1,0 +1,17 @@
+@use 'variables' as *;
+
+.errors-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: $default-error-color;
+
+  &.single-error {
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .actions {
+    text-align: right;
+  }
+}

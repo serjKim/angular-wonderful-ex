@@ -1,0 +1,6 @@
+<button mat-button [matMenuTriggerFor]="headerMenu"><mat-icon>person</mat-icon> {{ userName$ | async }}</button>
+<mat-menu #headerMenu="matMenu">
+  <button mat-menu-item>Item 1</button>
+  <button mat-menu-item (click)="onItem2()">Item 2</button>
+</mat-menu>
+<button mat-button *wex="afterLogout$ | async; state as s" (click)="logout()" [disabled]="s.pending">Logout</button>
