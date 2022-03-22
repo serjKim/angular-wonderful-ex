@@ -271,7 +271,7 @@ module.exports = {
           ],
           "id-match": "error",
           "import/no-deprecated": "warn",
-          "import/order": "error",
+          "import/order": "warn",
           "jsdoc/check-alignment": "off",
           "jsdoc/check-indentation": "off",
           "jsdoc/newline-after-description": "error",
