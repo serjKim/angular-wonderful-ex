@@ -11,7 +11,7 @@ export type Items =
   ;
 
 @Injectable({ providedIn: 'root' })
-export class StorageService {
+export class Storage {
   private readonly refresher$ = new Subject<void>();
   private counter = 0;
 
@@ -28,7 +28,7 @@ export class StorageService {
   private loadItems(): Observable<Items> {
     return defer(() => {
       const current = this.counter++;
-      console.log('Loading: ', current);
+      console.debug('Loading: ', current);
       return of(current);
     }).pipe(
       map((x) => {

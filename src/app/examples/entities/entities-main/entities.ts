@@ -31,7 +31,7 @@ export class Entities {
   constructor() {
     this.entities = this.entities$.asObservable().pipe(
       delay(300),
-      tap(() => console.log('entities list')),
+      tap(() => console.debug('entities list')),
       startWith(pending()),
     );
   }

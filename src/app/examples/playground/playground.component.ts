@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Roulette, RouletteStorage } from '../roulette-storage.service';
-import { Items, StorageService } from '../storage.service';
+import { Items, Storage } from '../storage.service';
 
 @Component({
   selector: 'wex-playground',
@@ -16,7 +16,7 @@ export class PlaygroundComponent {
   public allowLoad = true;
   public allowRoulette = false;
 
-  constructor(private readonly storageService: StorageService, rouletteStorage: RouletteStorage) {
+  constructor(private readonly storageService: Storage, rouletteStorage: RouletteStorage) {
     this.items$ = storageService.getItems();
     this.roulette$ = rouletteStorage.load();
   }
