@@ -9,6 +9,10 @@
   position: fixed;
 }
 
-.example-spacer {
+.spacer {
   flex: 1 1 auto;
+}
+
+.home-link {
+  display: flex;
 }

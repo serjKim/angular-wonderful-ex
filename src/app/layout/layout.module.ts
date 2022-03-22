@@ -8,14 +8,13 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
-import { BodyLayoutComponent } from './body-layout/body-layout.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { SideNavLinkComponent } from './sidenav-link';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { HeaderComponent } from './header/header.component';
 
 @NgModule({
-  declarations: [MainLayoutComponent, SidenavComponent, BodyLayoutComponent, SideNavLinkComponent, HeaderComponent],
+  declarations: [MainLayoutComponent, SidenavComponent, SideNavLinkComponent, HeaderComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -27,6 +26,6 @@ import { HeaderComponent } from './header/header.component';
     MatTooltipModule,
     MdlLayoutModule,
   ],
-  exports: [MainLayoutComponent, BodyLayoutComponent],
+  exports: [MainLayoutComponent, HeaderComponent],
 })
 export class LayoutModule {}

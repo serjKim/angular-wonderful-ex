@@ -13,7 +13,7 @@ $_typography: mat.define-typography-config(
   $input:
     mat.define-typography-level(
       $font-size: inherit,
-      $line-height: 1.1,
+      $line-height: 1.2,
     ),
 );
 $theme: mat.define-light-theme(
@@ -26,16 +26,23 @@ $theme: mat.define-light-theme(
   )
 );
 
-// Get configs
+// Get configs, palettes
 $_color-config: mat.get-color-config($theme);
-$_background-palette: map.get($_color-config, 'background');
-$_foreground-palette: map.get($_color-config, 'foreground');
+$_background-palette: map.get($_color-config, background);
+$_foreground-palette: map.get($_color-config, foreground);
+$_primary-palette: map.get($_color-config, primary);
+$_accent-palette: map.get($_color-config, accent);
+$_warn-palette: map.get($_color-config, warn);
 $_body_1: map.get($_typography, body-1);
 
 // Variables
 $default-body-font-size: map.get($_body_1, font-size);
 $default-foreground-color: mat.get-color-from-palette($_foreground-palette, base);
+$default-background-color: mat.get-color-from-palette($_background-palette, card);
 $default-hover-color: mat.get-color-from-palette($_background-palette, hover);
+$default-error-color: mat.get-color-from-palette($_warn-palette);
+$default-error-border: mat.get-color-from-palette($_warn-palette, 200);
+$default-icon-color: mat.get-color-from-palette($_foreground-palette, icon);
 
 $badge-red-color: map.get(mat.$red-palette, 300);
 $badge-purple-color: map.get(mat.$purple-palette, 300);

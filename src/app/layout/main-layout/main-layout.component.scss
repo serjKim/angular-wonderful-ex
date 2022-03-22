@@ -15,6 +15,7 @@
     position: fixed;
     top: $header-height;
     bottom: 0;
+    z-index: 1;
 
     &.collapsed {
       width: $sidenav-width-collapsed;
