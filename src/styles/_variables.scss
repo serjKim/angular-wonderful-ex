@@ -10,6 +10,11 @@ $_primary: mat.define-palette(mat.$deep-purple-palette);
 $_accent: mat.define-palette(mat.$amber-palette, A200, A100, A400);
 $_typography: mat.define-typography-config(
   $font-family: $default-font-family,
+  $input:
+    mat.define-typography-level(
+      $font-size: inherit,
+      $line-height: 1.1,
+    ),
 );
 $theme: mat.define-light-theme(
   (
