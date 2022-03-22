@@ -65,5 +65,9 @@
     "src/**/*.{ts,html}": [
       "eslint --fix --max-warnings 0"
     ]
+  },
+  "engines": {
+    "node": ">=16.10.0",
+    "npm": ">=8.0.0"
   }
 }
