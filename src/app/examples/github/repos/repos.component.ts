@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Repos } from '../github.service';
-import { ReposService } from './repos.service';
+import { ReposStorage } from './repos.service';
 
 @Component({
   selector: 'wex-repos',
@@ -15,7 +15,7 @@ export class ReposComponent {
   public readonly repos$: Repos;
   public allowEditor = true;
 
-  constructor(reposService: ReposService) {
+  constructor(reposService: ReposStorage) {
     this.repos$ = reposService.loadRepos(this.searchControl.valueChanges as Observable<string>);
   }
 }

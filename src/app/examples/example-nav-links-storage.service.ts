@@ -3,7 +3,7 @@ import { interval, map, of } from 'rxjs';
 import { NavLink, SideNavLinksStorage } from '../layout';
 
 @Injectable()
-export class ExampleNavLinksStorageService extends SideNavLinksStorage {
+export class ExampleNavLinksStorage extends SideNavLinksStorage {
   public readonly links = of([
     new NavLink(['playground'], 'Playground', 'home', of('1')),
     new NavLink(

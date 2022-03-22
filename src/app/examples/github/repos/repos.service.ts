@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 import { coreError, isOk } from '../../../core';
-import { GithubService, Repos } from '../github.service';
+import { GithubStorage, Repos } from '../github.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ReposService {
-  constructor(private readonly githubService: GithubService) {}
+export class ReposStorage {
+  constructor(private readonly githubService: GithubStorage) {}
 
   public loadRepos(searchTerm: Observable<string>): Repos {
     return searchTerm.pipe(

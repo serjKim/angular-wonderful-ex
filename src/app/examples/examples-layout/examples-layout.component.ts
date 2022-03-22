@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ExampleNavLinksStorageService } from '../example-nav-links-storage.service';
+import { ExampleNavLinksStorage } from '../example-nav-links-storage.service';
 import { SideNavLinksStorage } from '../../layout';
 
 @Component({
@@ -7,7 +7,7 @@ import { SideNavLinksStorage } from '../../layout';
   templateUrl: './examples-layout.component.html',
   styleUrls: ['./examples-layout.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{ provide: SideNavLinksStorage, useClass: ExampleNavLinksStorageService }],
+  providers: [{ provide: SideNavLinksStorage, useClass: ExampleNavLinksStorage }],
 })
 export class ExamplesLayoutComponent {
   constructor() {}

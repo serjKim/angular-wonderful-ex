@@ -13,7 +13,7 @@ export type Repos = Observable<CoreResult<Repo[]>>;
 @Injectable({
   providedIn: 'root',
 })
-export class GithubService {
+export class GithubStorage {
   /*
   Original impl:
   constructor(private readonly http: HttpClient) { }

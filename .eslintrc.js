@@ -82,7 +82,7 @@ module.exports = {
           ],
           "@typescript-eslint/consistent-type-assertions": "error",
           "@typescript-eslint/consistent-type-definitions": "off",
-          "@typescript-eslint/dot-notation": "error",
+          "@typescript-eslint/dot-notation": ["warn"],
           "@typescript-eslint/explicit-member-accessibility": [
               "error",
               {
@@ -182,12 +182,20 @@ module.exports = {
               "selector": "enumMember",
               "format": ["PascalCase"],
             },
+            {
+              "selector": "class",
+              "format": ["PascalCase"],
+              "custom": {
+                "regex": ".*Service$",
+                "match": false
+              }
+            }
           ],
           "@typescript-eslint/no-empty-function": "off",
           "@typescript-eslint/no-empty-interface": "error",
           "@typescript-eslint/no-explicit-any": "error",
           "@typescript-eslint/no-inferrable-types": [
-              "error",
+              "warn",
               {
                   "ignoreParameters": true
               }
@@ -195,6 +203,8 @@ module.exports = {
           "@typescript-eslint/no-misused-new": "error",
           "@typescript-eslint/no-namespace": "error",
           "@typescript-eslint/no-non-null-assertion": "error",
+          "@typescript-eslint/no-non-null-asserted-nullish-coalescing": "error",
+          "@typescript-eslint/no-non-null-asserted-optional-chain": "error",
           "@typescript-eslint/no-parameter-properties": "off",
           "@typescript-eslint/no-shadow": [
               "warn",
@@ -234,6 +244,21 @@ module.exports = {
             {
               "allowExpressions": true
             }
+          ],
+          "@typescript-eslint/unbound-method": [
+            "error",
+            {
+              "ignoreStatic": true
+            }
+          ],
+          "@typescript-eslint/no-unsafe-assignment": [
+            "warn"
+          ],
+          "@typescript-eslint/no-unsafe-member-access": [
+            "warn"
+          ],
+          "@typescript-eslint/no-unsafe-call": [
+            "warn"
           ],
           "arrow-body-style": ["warn", "as-needed"],
           "arrow-parens": [
@@ -291,10 +316,9 @@ module.exports = {
           "no-caller": "error",
           "no-cond-assign": "error",
           "no-console": [
-              "error",
+              "warn",
               {
                   "allow": [
-                      "log",
                       "warn",
                       "dir",
                       "timeLog",
@@ -351,7 +375,7 @@ module.exports = {
           "prefer-const": "error",
           "quote-props": [
               "error",
-              "as-needed"
+              "consistent"
           ],
           "radix": "error",
           "react/jsx-curly-spacing": "off",
