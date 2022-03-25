@@ -10,8 +10,6 @@ import { of } from 'rxjs';
 export class HeaderMenuComponent {
   public readonly userName$ = of('User 123');
 
-  public logout(): void {}
-
   public onItem2(): void {
     console.debug(1);
   }
