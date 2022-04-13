@@ -15,8 +15,13 @@ function isClientHttpError(x: unknown): x is ClientHttpError {
   return !!raw?.errorMessage;
 }
 
+function isStringError(x: unknown): x is string {
+  const raw = x as ClientHttpError;
+  return typeof raw === 'string';
+}
+
 interface ClientHttpErrors {
-  errors: { [propName: string]: ClientHttpError[] | null } | null;
+  errors: { [propName: string]: (ClientHttpError | string)[] | null } | null;
 }
 
 class CoreErrorHandler {
@@ -62,10 +67,12 @@ class CoreErrorHandler {
         continue;
       }
       for (const error of errors) {
-        if (!isClientHttpError(error)) {
-          continue;
+        if (isClientHttpError(error)) {
+          allErrors.push(error.errorMessage);
         }
-        allErrors.push(error.errorMessage);
+        if (isStringError(error)) {
+          allErrors.push(error);
+        }
       }
     }
 
