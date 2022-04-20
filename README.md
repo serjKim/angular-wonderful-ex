@@ -204,7 +204,7 @@ function wrap<T>(): OperatorFunction<T, CoreResult<T>> {
   return pipe(catchCoreError(), startWith(pending()));
 }
 
-type CoreResult<T> = Observable<T | CoreResultError | Pending>;
+type CoreResult<T> = T | CoreResultError | Pending;
 
 type CoreResultError =
   | HttpResponseError
