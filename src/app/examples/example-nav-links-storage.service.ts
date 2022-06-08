@@ -20,6 +20,8 @@ export class ExampleNavLinksStorage extends SideNavLinksStorage {
         new NavLink(['entities', 1636], 'Invalid link', 'description'),
       ]),
     ),
+    new NavLink(['crud-entities'], 'CRUD Entities', 'folder', undefined, 'red'),
+    new NavLink(['crud-entities', 'create'], 'Create a CRUD entity', 'description', undefined, 'home'),
     new NavLink(['github'], 'Github', 'settings', of('8'), 'red'),
     new NavLink(['simple-confirmation'], 'Simple Confirmation Dialog', 'contact_support', of('')),
     new NavLink(['a', 'b', 'c'], 'A link', 'calendar_today', of('99'), 'amber'),

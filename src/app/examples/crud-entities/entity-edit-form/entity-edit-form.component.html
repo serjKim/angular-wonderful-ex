@@ -1,0 +1,12 @@
+<div *ngIf="entity">Current edited entity: {{ entity.entityId }}</div>
+
+<mat-form-field appearance="fill">
+  <mat-label>Enter a number</mat-label>
+  <input matInput [formControl]="nameControl" />
+</mat-form-field>
+
+<p>
+  <span>Enter</span>
+  <i>400</i>
+  <span> to raise 400 http error.</span>
+</p>

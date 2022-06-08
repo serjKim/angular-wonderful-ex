@@ -1,0 +1,18 @@
+<div *wexUnwrap="entities$ | async as entities; state as s">
+  <div *ngIf="s.pending; else entitiesList">Loading...</div>
+  <ng-template #entitiesList>
+    <ng-container *ngIf="!!entities?.length; else noEntities">
+      <div *ngFor="let entity of entities">
+        <span>
+          {{ entity.name }}
+        </span>
+        <span>
+          <a [routerLink]="entity.url">Edit</a>
+        </span>
+      </div>
+    </ng-container>
+  </ng-template>
+  <ng-template #noEntities>
+    <div>No Entities. <a [routerLink]="['create']">Create</a> a new one</div>
+  </ng-template>
+</div>

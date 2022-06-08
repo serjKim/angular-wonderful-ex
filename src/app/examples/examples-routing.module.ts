@@ -1,6 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { entitiesPath, githubPath, playgroundPath, simpleConfirmationPath } from '../app-routing-data';
+import {
+  crudEntitiesPath,
+  entitiesPath,
+  githubPath,
+  playgroundPath,
+  simpleConfirmationPath,
+} from '../app-routing-data';
 import { ExamplesLayoutComponent } from './examples-layout/examples-layout.component';
 import { PlaygroundComponent } from './playground/playground.component';
 
@@ -24,6 +30,10 @@ const routes: Routes = [
       {
         path: simpleConfirmationPath,
         loadChildren: () => import('./simple-confirmation').then((m) => m.SimpleConfirmationModule),
+      },
+      {
+        path: crudEntitiesPath,
+        loadChildren: () => import('./crud-entities').then((m) => m.CrudEntitiesModule),
       },
       {
         path: '**',

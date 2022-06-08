@@ -1,0 +1,9 @@
+<ng-container *wexUnwrap="entity$ | async as entity; error: entityLoadError">
+  <wex-entity-edit-form #editForm [entity]="entity"></wex-entity-edit-form>
+  <div *wexUnwrap="createdEntity$ | async; state as s">
+    <button mat-flat-button color="primary" [disabled]="s.pending" (click)="editEntity(entity, editForm)">Save</button>
+    <mat-spinner *ngIf="s.pending" [diameter]="40"></mat-spinner>
+  </div>
+</ng-container>
+
+<ng-template #entityLoadError> An error has occurred during entity loading. </ng-template>
