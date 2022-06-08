@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { exhaustMap, firstValueFrom, Observable, ReplaySubject } from 'rxjs';
 import { CoreResult, wrapAsync } from '../../../core';
-import { shareOne } from '../../../shared';
+import { shareLast } from '../../../shared';
 import { EntitiesStorage } from '../entities-storage.service';
 import { EntityId } from '../entity-id';
 
@@ -20,10 +20,7 @@ export class EntityCreator {
   private readonly createdEntitySubject = new ReplaySubject<Observable<CoreResult<number>>>(1);
 
   constructor(private readonly storage: EntitiesStorage, private readonly routing: EntityCreatorRouting) {
-    this.createdEntity = this.createdEntitySubject.pipe(
-      exhaustMap((x) => x),
-      shareOne(),
-    );
+    this.createdEntity = this.createdEntitySubject.pipe(exhaustMap((x) => x));
   }
 
   public createEntity(params: { readonly name: string }): void {
@@ -32,6 +29,6 @@ export class EntityCreator {
       await this.routing.goToEdit(newId);
       return newId;
     });
-    this.createdEntitySubject.next(source$);
+    this.createdEntitySubject.next(source$.pipe(shareLast()));
   }
 }

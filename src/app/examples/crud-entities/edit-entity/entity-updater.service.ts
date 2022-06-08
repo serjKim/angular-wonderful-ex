@@ -1,20 +1,17 @@
 import { Injectable } from '@angular/core';
-import { exhaustMap, firstValueFrom, Observable, Subject } from 'rxjs';
+import { exhaustMap, firstValueFrom, Observable, ReplaySubject } from 'rxjs';
 import { CoreResult, wrapAsync } from '../../../core';
-import { shareOne } from '../../../shared';
+import { shareLast } from '../../../shared';
 import { EntitiesStorage } from '../entities-storage.service';
 import { EntityId } from '../entity-id';
 
 @Injectable()
 export class EntityUpdater {
   public readonly updatedEntity: Observable<CoreResult<void>>;
-  private readonly updatedEntitySubject = new Subject<Observable<CoreResult<void>>>();
+  private readonly updatedEntitySubject = new ReplaySubject<Observable<CoreResult<void>>>(1);
 
   constructor(private readonly storage: EntitiesStorage) {
-    this.updatedEntity = this.updatedEntitySubject.pipe(
-      exhaustMap((x) => x),
-      shareOne(),
-    );
+    this.updatedEntity = this.updatedEntitySubject.pipe(exhaustMap((x) => x));
   }
 
   public update(entityId: EntityId, params: { readonly name: string }): void {
@@ -24,6 +21,6 @@ export class EntityUpdater {
       }
       return firstValueFrom(this.storage.updateEntity(entityId, params));
     });
-    this.updatedEntitySubject.next(source$);
+    this.updatedEntitySubject.next(source$.pipe(shareLast()));
   }
 }

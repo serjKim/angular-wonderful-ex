@@ -16,6 +16,7 @@ import { EntityUpdater } from './entity-updater.service';
 export class EditEntityComponent {
   public readonly entity$: Observable<CoreResult<Entity | null>>;
   public readonly updatedEntity$: Observable<CoreResult<void>> = this.entityUpdater.updatedEntity;
+  public showEditor = true;
 
   constructor(@Self() private readonly entityUpdater: EntityUpdater, editedEntityStorage: EditedEntityStorage) {
     this.entity$ = editedEntityStorage.entity;

@@ -1,9 +1,28 @@
-<ng-container *wexUnwrap="entity$ | async as entity; error: entityLoadError">
-  <wex-entity-edit-form #editForm [entity]="entity"></wex-entity-edit-form>
-  <div *wexUnwrap="updatedEntity$ | async; state as s">
-    <button mat-flat-button color="primary" [disabled]="s.pending" (click)="editEntity(entity, editForm)">Save</button>
-    <mat-spinner *ngIf="s.pending" [diameter]="40"></mat-spinner>
-  </div>
+<label for="display-edit-entity">
+  <input type="checkbox" id="display-edit-entity" [(ngModel)]="showEditor" />
+  Display the editor.
+</label>
+<ng-container *ngIf="showEditor">
+  <ng-container *wexUnwrap="entity$ | async as entity; error: entityLoadError">
+    <wex-entity-edit-form #editForm [entity]="entity"></wex-entity-edit-form>
+    <div *wexUnwrap="updatedEntity$ | async; state as s">
+      <button mat-flat-button color="primary" [disabled]="s.pending" (click)="editEntity(entity, editForm)">
+        Save
+      </button>
+      <mat-spinner *ngIf="s.pending" [diameter]="40"></mat-spinner>
+    </div>
+    <!--
+      Check that there is no extra fetch when resubscribing.
+      Steps:
+      Do update
+      Then hide the editor
+      Then show again one
+      No fetch will happen, if there is an error, it will be raised again (you will see the one in the toast).
+    -->
+    <div *wexUnwrap="updatedEntity$ | async; state as s">
+      <mat-spinner *ngIf="s.pending" [diameter]="40"></mat-spinner>
+    </div>
+  </ng-container>
 </ng-container>
 
 <ng-template #entityLoadError> An error has occurred during entity loading. </ng-template>
