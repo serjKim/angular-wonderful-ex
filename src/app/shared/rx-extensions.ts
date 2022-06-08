@@ -6,6 +6,7 @@ export function shareLast<T>(): MonoTypeOperatorFunction<T> {
     connector: () => new AsyncSubject<T>(),
     resetOnComplete: false,
     resetOnError: false,
+    resetOnRefCountZero: false,
   });
 }
 
