@@ -8,10 +8,10 @@ import { EntityId } from '../entity-id';
 @Injectable()
 export class EntityUpdater {
   public readonly updatedEntity: Observable<CoreResult<void>>;
-  private readonly createdEntitySubject = new Subject<Observable<CoreResult<void>>>();
+  private readonly updatedEntitySubject = new Subject<Observable<CoreResult<void>>>();
 
   constructor(private readonly storage: EntitiesStorage) {
-    this.updatedEntity = this.createdEntitySubject.pipe(
+    this.updatedEntity = this.updatedEntitySubject.pipe(
       exhaustMap((x) => x),
       shareOne(),
     );
@@ -24,6 +24,6 @@ export class EntityUpdater {
       }
       return firstValueFrom(this.storage.updateEntity(entityId, params));
     });
-    this.createdEntitySubject.next(source$);
+    this.updatedEntitySubject.next(source$);
   }
 }
