@@ -4,6 +4,7 @@ import { CoreResult } from 'src/app/core';
 import { EditedEntityStorage } from '../edited-entity-storage.service';
 import { Entity } from '../entity';
 import { EntityEditFormComponent } from '../entity-edit-form/entity-edit-form.component';
+import { EntityId } from '../entity-id';
 import { EntityUpdater } from './entity-updater.service';
 
 @Component({
@@ -15,7 +16,7 @@ import { EntityUpdater } from './entity-updater.service';
 })
 export class EditEntityComponent {
   public readonly entity$: Observable<CoreResult<Entity | null>>;
-  public readonly updatedEntity$: Observable<CoreResult<void>> = this.entityUpdater.updatedEntity;
+  public readonly updatedEntity$: Observable<CoreResult<EntityId>> = this.entityUpdater.updatedEntity;
   public showEditor = true;
 
   constructor(@Self() private readonly entityUpdater: EntityUpdater, editedEntityStorage: EditedEntityStorage) {

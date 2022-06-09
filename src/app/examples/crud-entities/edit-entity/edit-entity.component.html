@@ -13,11 +13,6 @@
     </div>
     <!--
       Check that there is no extra fetch when resubscribing.
-      Steps:
-      Do update
-      Then hide the editor
-      Then show again one
-      No fetch will happen, if there is an error, it will be raised again (you will see the one in the toast).
     -->
     <div *wexUnwrap="updatedEntity$ | async; state as s">
       <mat-spinner *ngIf="s.pending" [diameter]="40"></mat-spinner>

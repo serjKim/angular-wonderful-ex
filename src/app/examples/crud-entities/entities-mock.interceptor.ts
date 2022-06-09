@@ -23,6 +23,10 @@ export class EntitiesMockInterceptor implements HttpInterceptor {
   constructor(@Inject(WINDOW) private readonly window: Window) {}
 
   public intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    if (request.url.includes('/entities')) {
+      console.debug(`fetching ${request.method} ${request.url}`);
+    }
+
     if (request.url.includes('/entities') && request.method === 'GET') {
       const segment = request.url.split('/').pop() ?? '';
       if (segment === 'entities') {
