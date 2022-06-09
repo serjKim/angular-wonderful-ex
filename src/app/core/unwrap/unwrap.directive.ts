@@ -1,14 +1,10 @@
-import { Directive, Input, OnChanges, SimpleChange, TemplateRef, ViewContainerRef } from '@angular/core';
-import { CoreResult, isError, isPending } from '../result';
+import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 import { CoreErrorEmitter } from '../error';
+import { CoreResult, isError, isPending } from '../result';
 
 class UnwrapState {
   constructor(public readonly pending: boolean, public readonly error: boolean) {}
 }
-
-type DirectiveChanges<T> = {
-  [name in keyof UnwrapDirective<T>]?: SimpleChange;
-};
 
 class UnwrapDirectiveContext<T> {
   constructor(public readonly wexUnwrap: T | null, public readonly state: UnwrapState) {}
@@ -17,7 +13,7 @@ class UnwrapDirectiveContext<T> {
 @Directive({
   selector: '[wexUnwrap]',
 })
-export class UnwrapDirective<T> implements OnChanges {
+export class UnwrapDirective<T> {
   @Input('wexUnwrapError')
   public errorTemplate: TemplateRef<unknown> | null = null;
 
@@ -25,7 +21,16 @@ export class UnwrapDirective<T> implements OnChanges {
   public pendingTemplate: TemplateRef<unknown> | null = null;
 
   @Input('wexUnwrap')
-  public value: CoreResult<T> | null = null;
+  public set value(val: CoreResult<T> | null) {
+    this.val = val;
+    this.render();
+  }
+
+  public get value(): CoreResult<T> | null {
+    return this.val;
+  }
+
+  private val: CoreResult<T> | null = null;
 
   constructor(
     private readonly templateRef: TemplateRef<UnwrapDirectiveContext<T | null>>,
@@ -35,29 +40,6 @@ export class UnwrapDirective<T> implements OnChanges {
 
   public static ngTemplateContextGuard<T>(_: UnwrapDirective<T>, ctx: unknown): ctx is UnwrapDirectiveContext<T> {
     return true;
-  }
-
-  public ngOnChanges(changes: DirectiveChanges<T>): void {
-    const val = changes.value;
-    const errorTemplate = changes.errorTemplate;
-    const pendingTemplate = changes.pendingTemplate;
-    if (
-      this.valueChanged(val) ||
-      errorTemplate?.previousValue !== errorTemplate?.currentValue ||
-      pendingTemplate?.previousValue !== pendingTemplate?.currentValue
-    ) {
-      this.render();
-    }
-  }
-
-  private valueChanged(val: SimpleChange | undefined): boolean {
-    if (isPending(val?.previousValue) && isPending(val?.currentValue)) {
-      return false;
-    }
-    if (val?.previousValue == null && val?.currentValue == null) {
-      return true;
-    }
-    return val.previousValue !== val.currentValue;
   }
 
   private render(): void {
