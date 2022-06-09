@@ -54,7 +54,10 @@ export class UnwrapDirective<T> implements OnChanges {
     if (isPending(val?.previousValue) && isPending(val?.currentValue)) {
       return false;
     }
-    return val?.previousValue !== val?.currentValue;
+    if (val?.previousValue == null && val?.currentValue == null) {
+      return true;
+    }
+    return val.previousValue !== val.currentValue;
   }
 
   private render(): void {
