@@ -6,6 +6,10 @@ import { EditedEntityStorage } from '../edited-entity-storage.service';
 import { EntitiesStorage } from '../entities-storage.service';
 import { EntityId } from '../entity-id';
 
+interface UpdateEntityParams {
+  readonly name: string;
+}
+
 @Injectable()
 export class EntityUpdater {
   public readonly updatedEntity: Observable<CoreResult<void>>;
@@ -15,11 +19,8 @@ export class EntityUpdater {
     this.updatedEntity = this.updatedEntitySubject.pipe(exhaustMap((x) => x));
   }
 
-  public update(entityId: EntityId, params: { readonly name: string }): void {
+  public update(entityId: EntityId, params: UpdateEntityParams): void {
     const source$ = wrapAsync(async () => {
-      if (!entityId) {
-        throw new Error('entity is required.');
-      }
       await firstValueFrom(this.storage.updateEntity(entityId, params));
       this.editedEntityStorage.load(entityId);
     });

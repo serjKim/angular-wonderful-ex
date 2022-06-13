@@ -14,6 +14,10 @@ export class EntityCreatorRouting {
   }
 }
 
+interface CreateEntityParams {
+  readonly name: string;
+}
+
 @Injectable()
 export class EntityCreator {
   public readonly createdEntity: Observable<CoreResult<number>>;
@@ -23,7 +27,7 @@ export class EntityCreator {
     this.createdEntity = this.createdEntitySubject.pipe(exhaustMap((x) => x));
   }
 
-  public createEntity(params: { readonly name: string }): void {
+  public createEntity(params: CreateEntityParams): void {
     const source$ = wrapAsync(async () => {
       const newId = await firstValueFrom(this.storage.createEntity(params));
       await this.routing.goToEdit(newId);
